@@ -74,7 +74,13 @@
      * Create the overlay element and the default content
      */
     initOverlay: function() {
-      this.overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>').hide();
+      this.overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
+        .css({
+          position: 'absolute',
+          zIndex: 9,
+          opacity: 0.7
+        })
+        .hide();
 
       this.overlayContent = this.overlay.find('.loading-overlay-content');
 
