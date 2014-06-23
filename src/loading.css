@@ -1,0 +1,29 @@
+.loading-overlay {
+  position: absolute;
+  z-index: 5;
+}
+
+.loading-overlay-content {
+  height: 50%;
+
+  /* Modify below to add custom styling */
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* Default themes */
+
+.loading-overlay.loading-theme-light {
+  background-color: #eee;
+  color: #000;
+  opacity: 0.5;
+}
+
+.loading-overlay.loading-theme-dark {
+  background-color: #000;
+  color: #fff;
+  opacity: 0.7;
+}
