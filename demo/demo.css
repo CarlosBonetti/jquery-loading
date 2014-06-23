@@ -13,7 +13,7 @@
   border-top-right-radius: 0;
 }
 
-.example pre code {
+.example pre  {
   height: 200px;
   overflow: auto;
 }
