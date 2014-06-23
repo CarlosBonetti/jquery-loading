@@ -1,7 +1,7 @@
 {
   "name": "jquery-loading",
   "version": "0.0.0",
-  "description": "Add loading state on any element of the page",
+  "description": "Add and manipulate loading states of any element on the page",
   "keywords": [
     "jquery",
     "overlay",
