@@ -1,0 +1,28 @@
+.loading-div {
+  height: 180px;
+  padding: 15px 25px;
+  color: #eee;
+}
+
+.loading-div.clickable {
+  cursor: pointer;
+}
+
+.example pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.example pre code {
+  height: 200px;
+  overflow: auto;
+}
+
+.example button.btn-block {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+footer {
+  padding-bottom: 30px;
+}
