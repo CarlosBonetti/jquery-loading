@@ -1,0 +1,19 @@
+{
+  "name": "jquery-loading",
+  "version": "0.0.0",
+  "description": "Easily add and manipulate loading states of any element on the page",
+  "keywords": [
+    "jquery",
+    "overlay",
+    "loading",
+    "ajax"
+  ],
+  "authors": [
+    "Carlos Bonetti <carlosb_bc@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CarlosBonetti/jquery-loading",
+  "ignore": [
+    "node_modules"
+  ]
+}

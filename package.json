@@ -1,12 +1,11 @@
 {
   "name": "jquery-loading",
   "version": "0.0.0",
-  "description": "Add and manipulate loading states of any element on the page",
+  "description": "Easily add and manipulate loading states of any element on the page",
   "keywords": [
     "jquery",
     "overlay",
     "loading",
-    "backdrop",
     "ajax"
   ],
   "author": "Carlos Bonetti",
