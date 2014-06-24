@@ -3,6 +3,7 @@
   var Loading = function(element, options) {
     this.element = element;
     this.settings = $.extend({}, Loading.defaults, options);
+    this.settings.fullPage = this.element.is('body');
 
     this.init();
   };
@@ -76,8 +77,8 @@
     initOverlay: function() {
       this.overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
         .css({
-          position: 'absolute',
-          zIndex: 9,
+          position: this.settings.fullPage ? 'fixed' : 'absolute',
+          zIndex: 9 + this.settings.fullPage,
           opacity: 0.7,
           display: 'table'
         })
@@ -140,8 +141,9 @@
           totalWidth = element.outerWidth(),
           totalHeight = element.outerHeight();
 
-      if (element.is('body')) {
-        totalHeight = $(document).height();
+      if (this.settings.fullPage) {
+        totalHeight = '100%';
+        totalWidth = '100%';
       }
 
       this.overlay.css({
