@@ -78,11 +78,17 @@
         .css({
           position: 'absolute',
           zIndex: 9,
-          opacity: 0.7
+          opacity: 0.7,
+          display: 'table'
         })
         .hide();
 
-      this.overlayContent = this.overlay.find('.loading-overlay-content');
+      this.overlayContent = this.overlay.find('.loading-overlay-content')
+        .css({
+          display: 'table-cell',
+          verticalAlign: 'middle',
+          textAlign: 'center'
+        });
 
       $('body').prepend(this.overlay);
 
@@ -144,8 +150,6 @@
         width: totalWidth,
         height: totalHeight
       });
-
-      this.overlayContent.css('marginTop', (totalHeight / 2) - (this.overlayContent.height() / 2));
     },
 
     /**

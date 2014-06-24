@@ -1,15 +1,9 @@
 .loading-overlay-content {
-  height: 30%;
-
-  /* Modify below to add custom styling */
-  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.4em;
   font-size: 1.15em;
   font-weight: bold;
 }
-
-/* Default themes */
 
 .loading-overlay.loading-theme-light {
   background-color: #fff;
