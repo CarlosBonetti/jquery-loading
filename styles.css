@@ -19,7 +19,11 @@ body {
 
 .site-header h1 {
   margin: 0;
-  font-size: 50px;
+  font-size: 60px;
+}
+
+.header-buttons {
+  padding-top: 30px;
 }
 
 .loading-div {
