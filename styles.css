@@ -1,3 +1,27 @@
+@import url(http://fonts.googleapis.com/css?family=Oxygen:400);
+
+body {
+  font-family: 'Oxygen', sans-serif;
+}
+
+.site-header {
+  height: 400px;
+  color: #fff;
+  text-align: center;
+  background-color: rgb(7, 115, 130);
+  /* Generated with Trianglify http://qrohlf.com/trianglify/ */
+  background-image: url(background.svg);
+}
+
+.site-header-container {
+  padding-top: 90px;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 50px;
+}
+
 .loading-div {
   height: 180px;
   padding: 15px 25px;
