@@ -68,7 +68,8 @@
      */
     init: function() {
       this.initOverlay();
-      this.applyBinders();
+      this.attachMethodsToExternalEvents();
+      this.attachOptionsHandlers();
     },
 
     /**
@@ -102,32 +103,52 @@
     },
 
     /**
-     * Bind some methods to important events
+     * Attach some methods to external events
+     * e.g. overlay click, window resize etc
      */
-    applyBinders: function() {
+    attachMethodsToExternalEvents: function() {
       var self = this;
 
-      // Bind the stop method to the overlay if the `stoppable` option is set
+      // Stop loading if the `stoppable` option is set
       if (self.settings.stoppable) {
-        self.overlay.click(function() {
+        self.overlay.on('click', function() {
           self.stop();
         });
       }
 
-      // Bind the `onClick` event to the overlay
-      self.overlay.click(function() {
-        self.settings.onClick(self);
+      // Trigger the `loading.click` event if the overlay is clicked
+      self.overlay.on('click', function() {
+        self.element.trigger('loading.click', this);
       });
 
       // Bind the `resize` method to `window.resize`
-      $(window).resize(function() {
+      $(window).on('resize', function() {
         self.resize();
       });
 
       // Bind the `resize` method to `document.ready` to guarantee right
       // positioning and dimensions
-      $(document).ready(function() {
+      $(document).on('ready', function() {
         self.resize();
+      });
+    },
+
+    /**
+     * Attach the handlers defined on `options` for the respective events
+     */
+    attachOptionsHandlers: function() {
+      var self = this;
+
+      self.element.on('loading.start', function(event, loading) {
+        self.settings.onStart(loading);
+      });
+
+      self.element.on('loading.stop', function(event, loading) {
+        self.settings.onStop(loading);
+      });
+
+      self.element.on('loading.click', function(event, loading) {
+        self.settings.onClick(loading);
       });
     },
 
@@ -155,17 +176,17 @@
     },
 
     /**
-     * Shows the loading overlay and turn on the loading state
+     * Trigger the `loading.start` event and turn on the loading state
      */
     start: function() {
-      this.settings.onStart(this);
+      this.element.trigger('loading.start', this);
     },
 
     /**
-     * Hides the loading overlay and turn off the loading state
+     * Trigger the `loading.stop` event and turn off the loading state
      */
     stop: function() {
-      this.settings.onStop(this);
+      this.element.trigger('loading.stop', this);
     },
 
     /**
