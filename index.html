@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jquery-loading Demo</title>
 
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://yandex.st/highlightjs/8.0/styles/default.min.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="bower_components/highlightjs/styles/default.css" rel="stylesheet">
   <link href="dist/jquery.loading.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
 
@@ -16,9 +16,9 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="http://llllll.li/randomColor/randomColor.js"></script>
-  <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/randomColor/randomColor.js"></script>
+  <script src="bower_components/highlightjs/highlight.pack.js"></script>
   <script src="dist/jquery.loading.js"></script>
 </head>
 
@@ -288,7 +288,7 @@ $('#loading-body-btn').click(function() {
       if (scripts.length > 0) {
         var codeText = scripts.text().trim();
 
-        var code = $('<pre><code>' + codeText + '</code></pre>');
+        var code = $('<pre><code class="javascript">' + codeText + '</code></pre>');
         $(this).append(code);
       }
     });

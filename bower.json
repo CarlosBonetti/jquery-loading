@@ -1,0 +1,17 @@
+{
+  "name": "jquery-loading-gh-pages",
+  "version": "0.0.0",
+  "homepage": "https://github.com/CarlosBonetti/jquery-loading",
+  "authors": [
+    "Carlos Bonetti <carlosb_bc@hotmail.com>"
+  ],
+  "description": "Webpage for the jquery-loading project",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "randomColor": "~0.1.1",
+    "bootstrap": "~3.1.1",
+    "highlightjs": "~8.0.0"
+  }
+}
