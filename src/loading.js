@@ -118,7 +118,7 @@
 
       // Trigger the `loading.click` event if the overlay is clicked
       self.overlay.on('click', function() {
-        self.element.trigger('loading.click', this);
+        self.element.trigger('loading.click', self);
       });
 
       // Bind the `resize` method to `window.resize`
