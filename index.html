@@ -179,14 +179,25 @@
       <div class="col-lg-12">
         <h2 id="states-and-events">States and events</h2>
       </div>
-    </div>
-
+    </div>-->
 
     <div class="row">
       <div class="col-lg-12">
-        <h2>Selector</h2>
+        <h2 id="selector">The <code>:loading</code> selector</h2>
+
+        <div class="row">
+          <div class="col-md-4">
+            <p>Use it to get elements with the loading state currently on.</p>
+          </div>
+
+          <div class="col-md-8">
+            <pre><code class="javascript">$(':loading') // Get all the elements with the loading state on</code></pre>
+
+            <pre><code class="javascript">$('#element').is(':loading') // Check if the '#element' is loading</code></pre>
+          </div>
+        </div>
       </div>
-    </div>-->
+    </div>
 
     <div class="row">
       <div class="col-lg-12">
@@ -373,17 +384,6 @@ $('#loading-body-btn').click(function() {
           </td>
           <td>
             <code>$.Loading.setDefaults({ theme: 'blurred', message: 'Loadingdingdingding' })</code>
-          </td>
-        </tr>
-
-        <tr>
-          <td><code>:loading</code> selector</td>
-          <td>
-            Get the elements that are loading or check if some element is loading.<br>
-          </td>
-          <td>
-            <code>$(':loading')</code> will return all the elements that are currently loading. <br>
-            <code>$('#some-element').is(':loading')</code> will return whether the element is currently loading or not
           </td>
         </tr>
       </tbody>
