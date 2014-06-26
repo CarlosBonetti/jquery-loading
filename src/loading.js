@@ -64,7 +64,7 @@
   $.extend(Loading.prototype, {
 
     /**
-     * Initializes and create the overlay
+     * Initializes the overlay and attach handlers to the appropriate events
      */
     init: function() {
       this.initOverlay();
@@ -179,6 +179,7 @@
      * Trigger the `loading.start` event and turn on the loading state
      */
     start: function() {
+      this.isActive = true;
       this.element.trigger('loading.start', this);
     },
 
@@ -186,6 +187,7 @@
      * Trigger the `loading.stop` event and turn off the loading state
      */
     stop: function() {
+      this.isActive = false;
       this.element.trigger('loading.stop', this);
     },
 
@@ -193,7 +195,7 @@
      * Check whether the loading state is active or not
      */
     active: function() {
-      return this.overlay.is(':visible');
+      return this.isActive;
     },
 
     /**
