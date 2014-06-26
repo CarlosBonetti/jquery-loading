@@ -4,19 +4,8 @@
   color: #eee;
 }
 
-.example pre {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.example pre  {
-  height: 200px;
-  overflow: auto;
-}
-
-.example button.btn-block {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.example {
+  height: 270px;
 }
 
 footer {

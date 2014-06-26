@@ -129,6 +129,28 @@
     </div>
 
     <div class="example col-lg-4 col-sm-6">
+      <h3>Controls</h3>
+
+      <button id="loading-control-btn" class="btn btn-primary btn-block">Click me to start loading</button>
+
+      <div id="loading-control" class="loading-div">
+        This is button controled, using the :loading selector
+      </div>
+
+      <script>
+        $('#loading-control-btn').click(function() {
+          $('#loading-control').loading('toggle');
+
+          if ($('#loading-control').is(':loading')) {
+            $(this).html('Click me to stop loading');
+          } else{
+            $(this).html('Click me to start loading');
+          }
+        });
+      </script>
+    </div>
+
+    <div class="example col-lg-4 col-sm-6">
       <h3>Body loading</h3>
 
       <div>
