@@ -28,68 +28,173 @@
       <h1 class="site-title">jquery-loading</h1>
 
       <div class="header-buttons">
-        <iframe src="http://ghbtns.com/github-btn.html?user=CarlosBonetti&type=follow&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="220" height="30"></iframe>
-       <iframe src="http://ghbtns.com/github-btn.html?user=CarlosBonetti&repo=jquery-loading&type=watch&size=large&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" height="30"></iframe>
+        <p>
+          <iframe src="http://ghbtns.com/github-btn.html?user=CarlosBonetti&type=follow&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="220" height="30"></iframe>
+         <iframe src="http://ghbtns.com/github-btn.html?user=CarlosBonetti&repo=jquery-loading&type=watch&size=large&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="120" height="30"></iframe>
+        </p>
+
+        <p>
+          <a href="https://github.com/CarlosBonetti/jquery-loading">Download on Github</a>
+        </p>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Basic usage</h3>
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 id="example">Example of usage</h2>
 
-      <div id="loading-always" class="loading-div">
-        This div is always loading
+        <div class="row">
+
+          <div class="col-md-6">
+            <table class="table table-condensed" id="example-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Numbers</th>
+                  <th>Status</th>
+                  <th>Another</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2013</td>
+                  <td>23,789.23</td>
+                  <td>Finished</td>
+                  <td>Good</td>
+                </tr>
+                <tr>
+                  <td>2014</td>
+                  <td>19,990.11</td>
+                  <td>Open</td>
+                  <td>Bad</td>
+                </tr>
+                <tr>
+                  <td>2015</td>
+                  <td>8,123.42</td>
+                  <td>Open</td>
+                  <td>Ugly</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <script>
+              setInterval(function() {
+                $('#example-table').loading('toggle');
+              }, 2000);
+            </script>
+          </div>
+
+          <div class="col-md-6">
+<pre><code class="javascript">setInterval(function() {
+  $('#example-table').loading('toggle');
+}, 2000);</code></pre>
+
+            <p><a href="#basic-methods">See more examples</a></p>
+          </div>
+        </div>
       </div>
-
-<script>
-$('#loading-always').loading();
-</script>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Starting</h3>
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Getting started</h2>
+        <ol>
+          <li>
+            <p>Install from <a href="http://bower.io" target="_blank">bower</a>:</p>
+            <pre><code class="no-highlight">$ bower install jquery-loading</code></pre>
+            <p>Or download the <a href="https://github.com/CarlosBonetti/jquery-loading">source code on github</a>.</p>
+          </li>
 
-      <div id="loading-start" class="loading-div clickable">
-        This div will start loading if you click it
+          <li>
+            <p>Include jquery and jquery-loading in your page:</p>
+        <pre><code class="html">&lt;script src="http://code.jquery.com/jquery-1.11.0.min.js"&gt;&lt;/script&gt;<br>&lt;script src="jquery.loading.js"&gt;&lt;/script&gt;</code></pre>
+          </li>
+
+          <li>
+            <p>Call the plugin in the element you want to add the loading state:</p>
+        <pre><code class="javascript">$("#some-element").loading();</code></pre>
+          </li>
+        </ol>
       </div>
 
-<script>
-$('#loading-start').click(function() {
-  $(this).loading('start');
-});
-</script>
+      <div class="col-md-4">
+        <h2>Motivation</h2>
+
+        <p>The idea is to lock elements that are loading or working (in decorrence of an Ajax request, for example) while keeping the rest of the page available to the user.</p>
+
+        <p>Jquery-loading does that by adding an overlay on top of the loading element.</p>
+
+        <p>You can <a href="#customization">customize</a> this overlay however you want or don't use it at all and still have the <a href="#states-and-events">loading events management</a>. It's your call.</p>
+      </div>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Stopping</h3>
+    <div class="row">
+      <h2 id="basic-methods">Basic methods</h2>
 
-      <div id="loading-stop" class="loading-div clickable">
-        This div will stop loading if you click it
+      <div class="example col-lg-4 col-md-6 col-sm-6">
+        <h3>Starting</h3>
+
+        <div id="loading-always" class="loading-div">
+          This div is always loading
+        </div>
+
+  <script>
+  $('#loading-always').loading();
+  </script>
       </div>
 
-<script>
-$('#loading-stop').loading({
-  stoppable: true
-});
-</script>
-    </div>
+      <div class="example col-lg-4 col-md-6 col-sm-6">
+        <h3>Stopping</h3>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Toggling</h3>
+        <div id="loading-stop" class="loading-div clickable">
+          This div will stop loading if you click it
+        </div>
 
-      <div id="loading-toggle" class="loading-div">
-        This div is toggling the loading state
+  <script>
+  $('#loading-stop').loading({
+    stoppable: true
+  });
+  </script>
       </div>
 
-<script>
-setInterval(function() {
-  $('#loading-toggle').loading('toggle');
-}, 2000);
-</script>
+      <div class="example col-lg-4 col-md-6 col-sm-6">
+        <h3>Toggling</h3>
+
+        <div id="loading-toggle" class="loading-div">
+          This div is toggling the loading state
+        </div>
+
+  <script>
+  setInterval(function() {
+    $('#loading-toggle').loading('toggle');
+  }, 2000);
+  </script>
+      </div>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
+    <!--
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 id="states-and-events">States and events</h2>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Selector</h2>
+      </div>
+    </div>-->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 id="customization">Customization</h2>
+      </div>
+    </div>
+
+    <div class="example col-lg-4 col-md-6 col-sm-6">
       <h3>Custom animation</h3>
 
       <div id="loading-custom-animation" class="loading-div">
@@ -112,7 +217,7 @@ setInterval(function() {
 </script>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
+    <div class="example col-lg-4 col-md-6 col-sm-6">
       <h3>Themes</h3>
 
       <div id="loading-dark-theme" class="loading-div">
@@ -126,7 +231,7 @@ $('#loading-dark-theme').loading({
 </script>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
+    <div class="example col-lg-4 col-md-6 col-sm-6">
       <h3>Custom message</h3>
 
       <div id="loading-custom-message" class="loading-div">
@@ -140,7 +245,7 @@ $('#loading-custom-message').loading({
 </script>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
+    <div class="example col-lg-4 col-md-6 col-sm-6">
       <h3>Body loading</h3>
 
       <div>
@@ -215,7 +320,8 @@ $('#loading-body-btn').click(function() {
       <thead>
         <tr>
           <th>Method</th>
-          <th>Comments / Example</th>
+          <th>Description</th>
+          <th>Example</th>
         </tr>
       </thead>
 
@@ -224,31 +330,39 @@ $('#loading-body-btn').click(function() {
           <td><code>resize</code></td>
           <td>
             Recalculate and apply new dimensions and position to the overlay, based on the state of the target element. Call this method if the the overlay is not being shown on the right position and/or dimensions.
-            Example: <code>$('#some-loading-element').loading('resize')</code>
+          </td>
+          <td>
+            <code>$(...).loading('resize')</code>
           </td>
         </tr>
 
         <tr>
           <td><code>start</code></td>
           <td>
-            Turn <strong>on</strong> the loading state of some element.
-            Example: <code>$(...).loading('start')</code>
+            Turn <strong>on</strong> the loading state of some element and trigger the <code>loading.start</code> event.
+          </td>
+          <td>
+            <code>$(...).loading('start')</code>
           </td>
         </tr>
 
         <tr>
           <td><code>stop</code></td>
           <td>
-            Turn <strong>off</strong> the loading state of some element
-            Example: <code>$(...).loading('stop')</code>
+            Turn <strong>off</strong> the loading state of some element and trigger the <code>loading.stop</code> event.
+          </td>
+          <td>
+            <code>$(...).loading('stop')</code>
           </td>
         </tr>
 
         <tr>
           <td><code>toggle</code></td>
           <td>
-            Turn <strong>on</strong> or <strong>off</strong> the loading state of some element, depending of the current state
-            Example: <code>$(...).loading('toggle')</code>
+            Turn <strong>on</strong> or <strong>off</strong> the loading state of some element, depending of the current state, and trigger the respective event.
+          </td>
+          <td>
+            <code>$(...).loading('toggle')</code>
           </td>
         </tr>
 
@@ -256,7 +370,9 @@ $('#loading-body-btn').click(function() {
           <td><code>options</code></td>
           <td>
             Change some element's loading options at runtime
-            Example: <code>$(...).loading('options', { stoppable: true, ... })</code>
+          </td>
+          <td>
+            <code>$(...).loading('options', { stoppable: true, ... })</code>
           </td>
         </tr>
 
@@ -264,7 +380,9 @@ $('#loading-body-btn').click(function() {
           <td><code>$.Loading.setDefaults</code></td>
           <td>
             Extend the Loading plugin default options
-            Example: <code>$.Loading.setDefaults({ theme: 'blurred', message: 'Loadingdingdingding' })</code>
+          </td>
+          <td>
+            <code>$.Loading.setDefaults({ theme: 'blurred', message: 'Loadingdingdingding' })</code>
           </td>
         </tr>
 
@@ -272,7 +390,8 @@ $('#loading-body-btn').click(function() {
           <td><code>:loading</code> selector</td>
           <td>
             Get the elements that are loading or check if some element is loading.<br>
-            Examples: <br>
+          </td>
+          <td>
             <code>$(':loading')</code> will return all the elements that are currently loading. <br>
             <code>$('#some-element').is(':loading')</code> will return whether the element is currently loading or not
           </td>
@@ -303,6 +422,12 @@ $('#loading-body-btn').click(function() {
     });
 
     hljs.initHighlightingOnLoad();
+
+    // Dirty fix to force elements to resize since Hightlightjs mess up with overlay positionings
+    // Working in a definitive fix...
+    setTimeout(function() {
+      $(':loading').loading('resize');
+    }, 500);
   </script>
 </body>
 </html>

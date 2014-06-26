@@ -5,16 +5,17 @@ body {
 }
 
 .site-header {
-  height: 400px;
-  color: #fff;
+  height: 350px;
+  margin-bottom: 18px;
   text-align: center;
+  color: #fff;
+  font-size: 20px;
   background-color: rgb(7, 115, 130);
-  /* Generated with Trianglify http://qrohlf.com/trianglify/ */
-  background-image: url(background.svg);
+  background-image: url(background.svg); /* Generated with Trianglify http://qrohlf.com/trianglify/ */
 }
 
 .site-header-container {
-  padding-top: 90px;
+  padding-top: 80px;
 }
 
 .site-header h1 {
@@ -23,7 +24,32 @@ body {
 }
 
 .header-buttons {
-  padding-top: 30px;
+  padding-top: 60px;
+}
+
+.header-buttons p {
+  margin: 0 0 15px 0;
+}
+
+.header-buttons a {
+  color: #fff;
+  border-bottom: 1px dashed #fff;
+}
+
+.header-buttons a:hover {
+  text-decoration: none;
+  border-bottom: 1px solid #fff;
+}
+
+h2 {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+h2::before {
+  content: "# ";
+  font-size: 0.85em;
+  color: #ccc;
 }
 
 .loading-div {
@@ -42,7 +68,7 @@ body {
 }
 
 .example pre  {
-  height: 200px;
+  height: 180px;
   overflow: auto;
 }
 
