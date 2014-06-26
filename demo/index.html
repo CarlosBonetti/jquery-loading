@@ -129,7 +129,7 @@
     </div>
 
     <div class="example col-lg-4 col-sm-6">
-      <h3>Controls</h3>
+      <h3>Controls + :loading selector</h3>
 
       <button id="loading-control-btn" class="btn btn-primary btn-block">Click me to start loading</button>
 
@@ -162,6 +162,20 @@
           $('body').loading({
             stoppable: true
           });
+        });
+      </script>
+    </div>
+
+    <div class="example col-lg-4 col-sm-6">
+      <h3>:loading selector</h3>
+
+      <div>
+        <button id="stop-all" class="btn btn-primary btn-block">Stop all currently open</button>
+      </div>
+
+      <script>
+        $('#stop-all').click(function() {
+          $(':loading').loading('stop');
         });
       </script>
     </div>

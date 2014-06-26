@@ -246,6 +246,11 @@
 
   /**
    * Create the `:loading` jQuery selector
+   * Return all the jQuery elements with the loading state active
+   *
+   * Using the `:not(:loading)` will return all jQuery elements that are not
+   *  loading, event the ones with the plugin not attached.
+   *
    * Examples of use:
    *  `$(':loading')` to get all the elements with the loading state active
    *  `$('#my-element').is(':loading')` to check if the element is loading
