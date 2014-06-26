@@ -129,23 +129,23 @@
     </div>
 
     <div class="example col-lg-4 col-sm-6">
-      <h3>Controls + :loading selector</h3>
+      <h3>Controls with events handling</h3>
 
       <button id="loading-control-btn" class="btn btn-primary btn-block">Click me to start loading</button>
 
       <div id="loading-control" class="loading-div">
-        This is button controled, using the :loading selector
+        This div is button controled, using the events `loading.start` and `loading.stop` to change the state (text) of the button
       </div>
 
       <script>
         $('#loading-control-btn').click(function() {
           $('#loading-control').loading('toggle');
+        });
 
-          if ($('#loading-control').is(':loading')) {
-            $(this).html('Click me to stop loading');
-          } else{
-            $(this).html('Click me to start loading');
-          }
+        $('#loading-control').on('loading.start', function() {
+          $('#loading-control-btn').html('Click me to stop loading');
+        }).on('loading.stop', function() {
+          $('#loading-control-btn').html('Click me to start loading');
         });
       </script>
     </div>
