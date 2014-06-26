@@ -1,11 +1,3 @@
-/*
- *  jquery-loading - v0.0.0
- *  Easily add and manipulate loading states of any element on the page
- *  http://github.com/CarlosBonetti/jquery-loading
- *
- *  Made by Carlos Bonetti
- *  Under MIT License
- */
 ;(function($, window, undefined) {
 
   var Loading = function(element, options) {
