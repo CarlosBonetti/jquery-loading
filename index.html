@@ -131,7 +131,7 @@
     </div>
 
     <div class="row">
-      <h2 id="basic-methods">Basic methods</h2>
+      <h2 id="basic-usage">Basic usage</h2>
 
       <div class="example col-lg-4 col-md-6 col-sm-6">
         <h3>Starting</h3>
@@ -153,10 +153,14 @@
         </div>
 
   <script>
-  $('#loading-stop').loading({
-    stoppable: true
-  });
-  </script>
+// to close when clicked (example above)
+$('#loading-stop').loading({
+  stoppable: true
+});
+
+// or to close externally
+$('#another-loading').loading('stop');
+</script>
       </div>
 
       <div class="example col-lg-4 col-md-6 col-sm-6">
