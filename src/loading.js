@@ -207,13 +207,6 @@
       } else {
         this.start();
       }
-    },
-
-    /**
-     * Change the loading options at runtime
-     */
-    options: function(options) {
-      this.settings = $.extend({}, this.settings, options);
     }
   });
 
