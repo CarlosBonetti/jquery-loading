@@ -96,20 +96,8 @@
      */
     createOverlay: function() {
       var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
-        .css({
-          opacity: 0.7,
-          display: 'table'
-        })
-        .hide();
-
-      overlay.find('.loading-overlay-content')
-        .css({
-          display: 'table-cell',
-          verticalAlign: 'middle',
-          textAlign: 'center'
-        });
-
-      $('body').prepend(overlay);
+        .hide()
+        .appendTo('body');
 
       var elementID = this.element.attr('id');
       if (elementID) {
