@@ -389,6 +389,16 @@ $('#loading-body-btn').click(function() {
 
       <tbody>
         <tr>
+          <td><code>jQuery.fn.Loading</code></td>
+          <td>
+            Access the internal plugin object associated to the jQuery element. Note that this is different from the common <code>$.fn.loading</code> wich start the plugin and return a chainable jQuery object.
+          </td>
+          <td>
+            <code>$('#my-loading-element').Loading()</code>
+          </td>
+        </tr>
+
+        <tr>
           <td><code>resize</code></td>
           <td>
             Recalculate and apply new dimensions and position to the overlay, based on the state of the target element. Call this method if the the overlay is not being shown on the right position and/or dimensions.
