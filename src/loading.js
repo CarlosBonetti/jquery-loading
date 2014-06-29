@@ -15,7 +15,14 @@
   Loading.defaults = {
 
     /**
+     * jQuery element to be used as overlay
+     * If not defined, a default overlay will be created
+     */
+    overlay: undefined,
+
+    /**
      * Message to be rendered on the overlay content
+     * Has no effect if a custom overlay is defined
      */
     message: 'Loading...',
 
@@ -26,6 +33,7 @@
      *  define your own. Just add a `.loading-theme-my_awesome_theme` selector
      *  somewhere with your custom styles and change this option
      *  to 'my_awesome_theme'. The class is applied to the parent overlay div
+     * Has no effect if a custom overlay is defined
      */
     theme: 'light',
 
@@ -77,39 +85,38 @@
      */
     init: function() {
       this.isActive = false;
-      this.initOverlay();
+      this.overlay = this.settings.overlay || this.createOverlay();
+      this.resize();
       this.attachMethodsToExternalEvents();
       this.attachOptionsHandlers();
     },
 
     /**
-     * Create the overlay element and the default content
+     * Return a new default overlay (jQuery object)
      */
-    initOverlay: function() {
-      this.overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
+    createOverlay: function() {
+      var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
         .css({
-          position: this.settings.fullPage ? 'fixed' : 'absolute',
-          zIndex: 9 + this.settings.fullPage,
           opacity: 0.7,
           display: 'table'
         })
         .hide();
 
-      this.overlayContent = this.overlay.find('.loading-overlay-content')
+      overlay.find('.loading-overlay-content')
         .css({
           display: 'table-cell',
           verticalAlign: 'middle',
           textAlign: 'center'
         });
 
-      $('body').prepend(this.overlay);
+      $('body').prepend(overlay);
 
       var elementID = this.element.attr('id');
       if (elementID) {
-        this.overlay.attr('id', elementID + '_loading-overlay');
+        overlay.attr('id', elementID + '_loading-overlay');
       }
 
-      this.resize();
+      return overlay;
     },
 
     /**
@@ -168,7 +175,9 @@
      *  or dimension
      */
     resize: function() {
-      var element = this.element,
+      var self = this;
+
+      var element = self.element,
           totalWidth = element.outerWidth(),
           totalHeight = element.outerHeight();
 
@@ -178,6 +187,8 @@
       }
 
       this.overlay.css({
+        position: self.settings.fullPage ? 'fixed' : 'absolute',
+        zIndex: 9 + self.settings.fullPage,
         top: element.offset().top,
         left: element.offset().left,
         width: totalWidth,
