@@ -12,6 +12,7 @@ body {
   font-size: 20px;
   background-color: rgb(7, 115, 130);
   background-image: url(background.svg); /* Generated with Trianglify http://qrohlf.com/trianglify/ */
+  background-size: 100%;
 }
 
 .site-header-container {
