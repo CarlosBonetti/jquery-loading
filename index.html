@@ -382,6 +382,7 @@ $('#loading-body-btn').click(function() {
       <thead>
         <tr>
           <th>Method</th>
+          <th>Return type</th>
           <th>Description</th>
           <th>Example</th>
         </tr>
@@ -390,6 +391,7 @@ $('#loading-body-btn').click(function() {
       <tbody>
         <tr>
           <td><code>jQuery.fn.Loading</code></td>
+          <td><code>Loading</code></td>
           <td>
             Access the internal plugin object associated to the jQuery element. Note that this is different from the common <code>$.fn.loading</code> wich start the plugin and return a chainable jQuery object.
           </td>
@@ -400,6 +402,7 @@ $('#loading-body-btn').click(function() {
 
         <tr>
           <td><code>resize</code></td>
+          <td><code>jQuery</code></td>
           <td>
             Recalculate and apply new dimensions and position to the overlay, based on the state of the target element. Call this method if the the overlay is not being shown on the right position and/or dimensions.
           </td>
@@ -410,6 +413,7 @@ $('#loading-body-btn').click(function() {
 
         <tr>
           <td><code>start</code></td>
+          <td><code>jQuery</code></td>
           <td>
             Turn <strong>on</strong> the loading state of some element and trigger the <code>loading.start</code> event.
           </td>
@@ -420,6 +424,7 @@ $('#loading-body-btn').click(function() {
 
         <tr>
           <td><code>stop</code></td>
+          <td><code>jQuery</code></td>
           <td>
             Turn <strong>off</strong> the loading state of some element and trigger the <code>loading.stop</code> event.
           </td>
@@ -430,6 +435,7 @@ $('#loading-body-btn').click(function() {
 
         <tr>
           <td><code>toggle</code></td>
+          <td><code>jQuery</code></td>
           <td>
             Turn <strong>on</strong> or <strong>off</strong> the loading state of some element, depending of the current state, and trigger the respective event.
           </td>
@@ -440,11 +446,12 @@ $('#loading-body-btn').click(function() {
 
         <tr>
           <td><code>$.Loading.setDefaults</code></td>
+          <td><code>-</code></td>
           <td>
             Extend the Loading plugin default options
           </td>
           <td>
-            <code>$.Loading.setDefaults({ theme: 'blurred', message: 'Loadingdingdingding' })</code>
+            <code>$.Loading.setDefaults({ theme: 'blurred', ... })</code>
           </td>
         </tr>
       </tbody>
