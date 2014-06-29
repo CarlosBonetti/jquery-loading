@@ -179,6 +179,28 @@
         });
       </script>
     </div>
+
+    <div class="example col-lg-4 col-sm-6">
+      <h3><code>start</code> option</h3>
+
+      <div id="loading-lazy-start" class="loading-div">
+        This div is not started on initialization
+      </div>
+
+      <button id="loading-lazy-start-btn" class="btn btn-primary btn-block">But it will if you click here</button>
+
+      <script>
+        $('#loading-lazy-start').loading({
+          theme: 'dark',
+          message: 'Lazy start',
+          start: false
+        });
+
+        $('#loading-lazy-start-btn').click(function() {
+          $('#loading-lazy-start').loading('start');
+        });
+      </script>
+    </div>
   </div>
 
   <footer class="container text-right">
