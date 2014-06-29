@@ -118,6 +118,12 @@
             <p>Call the plugin in the element you want to add the loading state:</p>
         <pre><code class="javascript">$("#some-element").loading();</code></pre>
           </li>
+
+          <li>
+            <p>(optional) If you want to use some default themes and styles (like the ones used on this page), include the CSS file:</p>
+            <pre><code class="html">&lt;link href="jquery.loading.css" rel="stylesheet"&gt;</code></pre>
+            <p>You don't need to include it if you are using a <a href="#customization">custom overlay</a> element.</p>
+          </li>
         </ol>
       </div>
 
@@ -142,9 +148,9 @@
           This div is always loading
         </div>
 
-  <script>
+<script>
   $('#loading-always').loading();
-  </script>
+</script>
       </div>
 
       <div class="example col-lg-4 col-md-6 col-sm-6">
@@ -181,87 +187,124 @@ $('#another-loading').loading('stop');
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
-        <h2 id="states-and-events">States and events</h2>
+      <h2 id="full-page">Full page loader</h2>
 
-        <div class="row">
-          <div class="col-md-6">
-            <h3><code>loading.start</code></h3>
-
-            <p>Triggered when the loading state is started. Receives the loading object as parameter. Example:</p>
-
-            <pre><code class="javascript">$('#my-element').on('loading.start', function(event, loadingObj) {
-  // do something whenever the loading state of #my-element is turned on
-});</code></pre>
-          </div>
-
-          <div class="col-md-6">
-            <h3><code>loading.stop</code></h3>
-
-            <p>Triggered when the loading state is stopped. Receives the loading object as parameter. Example:</p>
-
-            <pre><code class="javascript">$('#my-element').on('loading.stop', function(event, loadingObj) {
-  // do something whenever the loading state of #my-element is turned off
-});</code></pre>
-          </div>
+      <div class="col-md-6">
+        <div>
+          <button id="loading-body-btn" class="btn btn-primary btn-block">Click me to add a loading state to the page's body</button>
         </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <h3><code>loading.click</code></h3>
+        <script>
+          $('#loading-body-btn').click(function() {
+            $('body').loading({
+              stoppable: true
+            });
+          });
+        </script>
+      </div>
 
-            <p>Triggered when the overlay element is clicked. Receives the loading object as parameter. Example:</p>
-
-            <pre><code class="javascript">$('#my-element').on('loading.click', function(event, loadingObj) {
-  // do something whenever the loading overlay of #my-element is clicked
+      <div class="col-md-6">
+        <pre class="javascript"><code>$('body').loading({
+stoppable: true
 });</code></pre>
-          </div>
+      </div>
+    </div>
 
-          <div class="col-md-6">
-            <h3>Initializing</h3>
+    <div class="row">
+      <h2 id="states-and-events">States and events</h2>
 
-            <p>There is a shortcut to provide event handlers at initilization:</p>
+      <div class="row">
+        <div class="col-md-6">
+          <h3><code>loading.start</code></h3>
 
-            <pre><code class="javascript">$('#my-element').loading({
-  onStart: function(loadingObj) { ... },
-  onStop: function(loadingObj) { ... },
-  onClick: function(loadingObj) { ... }
+          <p>Triggered when the loading state is started. Receives the loading object as parameter. Example:</p>
+
+          <pre><code class="javascript">$('#my-element').on('loading.start', function(event, loadingObj) {
+// do something whenever the loading state of #my-element is turned on
 });</code></pre>
-          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h3><code>loading.stop</code></h3>
+
+          <p>Triggered when the loading state is stopped. Receives the loading object as parameter. Example:</p>
+
+          <pre><code class="javascript">$('#my-element').on('loading.stop', function(event, loadingObj) {
+// do something whenever the loading state of #my-element is turned off
+});</code></pre>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h3><code>loading.click</code></h3>
+
+          <p>Triggered when the overlay element is clicked. Receives the loading object as parameter. Example:</p>
+
+          <pre><code class="javascript">$('#my-element').on('loading.click', function(event, loadingObj) {
+// do something whenever the loading overlay of #my-element is clicked
+});</code></pre>
+        </div>
+
+        <div class="col-md-6">
+          <h3>Initializing</h3>
+
+          <p>There is a shortcut to provide event handlers at initilization:</p>
+
+          <pre><code class="javascript">$('#my-element').loading({
+onStart: function(loadingObj) { ... },
+onStop: function(loadingObj) { ... },
+onClick: function(loadingObj) { ... }
+});</code></pre>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
-        <h2 id="selector">The <code>:loading</code> selector</h2>
+      <h2 id="selector">The <code>:loading</code> selector</h2>
 
-        <div class="row">
-          <div class="col-md-4">
-            <p>Use it to get elements with the loading state currently on.</p>
-          </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>Use it to get elements with the loading state currently on.</p>
+        </div>
 
-          <div class="col-md-8">
-            <pre><code class="javascript">$(':loading') // Get all the elements with the loading state on</code></pre>
+        <div class="col-md-8">
+          <pre><code class="javascript">$(':loading') // Get all the elements with the loading state on</code></pre>
 
-            <pre><code class="javascript">$('#element').is(':loading') // Check if the '#element' is loading</code></pre>
-          </div>
+          <pre><code class="javascript">$('#element').is(':loading') // Check if the '#element' is loading</code></pre>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <h2 id="customization">Customization</h2>
+    <div id="custom-overlay">
+      <div class="loading-spinner">
+        Custom loading...
       </div>
     </div>
 
-    <div class="example col-lg-4 col-md-6 col-sm-6">
-      <h3>Custom animation</h3>
+    <div class="row">
+      <h2 id="customization">Customization</h2>
 
-      <div id="loading-custom-animation" class="loading-div">
-        This div has a custom start / stop animation
+      <div class="example col-lg-4 col-md-6 col-sm-6">
+        <h3>Custom overlay</h3>
+
+        <div id="loading-custom-overlay" class="loading-div">
+          This div has a custom overlay element
+        </div>
+
+<script>
+$('#loading-custom-overlay').loading({
+  overlay: $("#custom-overlay")
+});
+</script>
       </div>
+
+      <div class="example col-lg-4 col-md-6 col-sm-6">
+        <h3>Custom animation</h3>
+
+        <div id="loading-custom-animation" class="loading-div">
+          This div has a custom start / stop animation
+        </div>
 
 <script>
 $('#loading-custom-animation').loading({
@@ -277,50 +320,57 @@ setInterval(function() {
   $('#loading-custom-animation').loading('toggle');
 }, 2000);
 </script>
+      </div>
     </div>
 
-    <div class="example col-lg-4 col-md-6 col-sm-6">
-      <h3>Themes</h3>
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Themes and default styles</h2>
 
-      <div id="loading-dark-theme" class="loading-div">
-        This div has a different theme (dark)
-      </div>
+        <p>You must include the <code>dist/jquery.loading.css</code> file in your page if you want to use the default themes. If you're working with a custom <code>overlay</code> element, the following options have no effect.</p>
+
+        <div class="example col-lg-4 col-md-6 col-sm-6">
+          <h3>Light theme</h3>
+
+          <div id="loading-light-theme" class="loading-div">
+            This div has the light theme
+          </div>
+
+<script>
+$('#loading-light-theme').loading({
+  theme: 'light' // This is the default theme
+});
+</script>
+        </div>
+
+        <div class="example col-lg-4 col-md-6 col-sm-6">
+          <h3>Dark theme</h3>
+
+          <div id="loading-dark-theme" class="loading-div">
+            This div has the dark theme
+          </div>
 
 <script>
 $('#loading-dark-theme').loading({
   theme: 'dark'
 });
 </script>
-    </div>
+        </div>
 
-    <div class="example col-lg-4 col-md-6 col-sm-6">
-      <h3>Custom message</h3>
+        <div class="example col-lg-4 col-md-6 col-sm-6">
+          <h3>Custom message</h3>
 
-      <div id="loading-custom-message" class="loading-div">
-        This div has a custom loading method
-      </div>
+          <div id="loading-custom-message" class="loading-div">
+            This div has a custom loading message
+          </div>
 
 <script>
 $('#loading-custom-message').loading({
   message: 'Working...'
 });
 </script>
-    </div>
-
-    <div class="example col-lg-4 col-md-6 col-sm-6">
-      <h3>Body loading</h3>
-
-      <div>
-        <button id="loading-body-btn" class="btn btn-primary btn-block">Click me to add a loading state to the page's body</button>
+        </div>
       </div>
-
-<script>
-$('#loading-body-btn').click(function() {
-  $('body').loading({
-    stoppable: true
-  });
-});
-</script>
     </div>
 
     <div class="clearfix"></div>
@@ -338,15 +388,21 @@ $('#loading-body-btn').click(function() {
 
       <tbody>
         <tr>
+          <td><code>overlay</code></td>
+          <td>-</td>
+          <td>jQuery element to be used as overlay. If not informed, the plugin will create a default one</td>
+        </tr>
+
+        <tr>
           <td><code>message</code></td>
           <td>Loading...</td>
-          <td>Message to be rendered on the overlay content</td>
+          <td>Message to be rendered on the overlay content. Has no effect if a custom <code>ovelay</code> was informed</td>
         </tr>
 
         <tr>
           <td><code>theme</code></td>
           <td>light</td>
-          <td>Theme to be used for the <code>overlay</code> element. If this options is set to, e.g., <code>whatever</code> then the class <code>.loading-theme-whatever</code> will be applied to the overlay element</td>
+          <td>Theme to be used for the <code>overlay</code> element. Some default themes are defined on the <code>jquery.loading.css</code> file (include it if you want to use the default themes). Has no effect if a custom <code>ovelay</code> was informed</td>
         </tr>
 
         <tr>
