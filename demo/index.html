@@ -80,7 +80,7 @@
     <div class="example col-lg-4 col-sm-6">
       <h3>Custom animation</h3>
 
-      <div id="loading-custom-animation" class="loading-div">
+      <div id="loading-custom-animation" class="loading-div loading-blink">
         This div has a custom start / stop animation
       </div>
 
@@ -93,10 +93,6 @@
             loading.overlay.slideUp(400);
           }
         });
-
-        setInterval(function() {
-          $('#loading-custom-animation').loading('toggle');
-        }, 2000);
       </script>
     </div>
 
@@ -180,6 +176,7 @@
       </script>
     </div>
 
+
     <div class="example col-lg-4 col-sm-6">
       <h3><code>start</code> option</h3>
 
@@ -201,6 +198,26 @@
         });
       </script>
     </div>
+
+    <div id="custom-overlay">
+      <div class="loading-spinner">
+        Loading (custom)...
+      </div>
+    </div>
+
+    <div class="example col-lg-4 col-sm-6">
+      <h3>Custom overlay</h3>
+
+      <div id="loading-custom-overlay" class="loading-div loading-blink">
+        This div has a custom overlay element
+      </div>
+
+      <script>
+        $('#loading-custom-overlay').loading({
+          overlay: $('#custom-overlay')
+        });
+      </script>
+    </div>
   </div>
 
   <footer class="container text-right">
@@ -213,6 +230,10 @@
         luminosity: 'dark'
       }));
     });
+
+    setInterval(function() {
+      $('.loading-blink').loading('toggle');
+    }, 2000);
   </script>
 </body>
 </html>
