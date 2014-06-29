@@ -6,12 +6,19 @@
 
   module('All tests', {
     setup: function() {
-      div = $('<div>Test div</div>');
+      div = $('<div id="test-div">Test div</div>');
     }
   });
 
   test('if loading jquery function is chainable', function() {
     ok(div.loading() instanceof $, 'loading is chainable');
+  });
+
+  test('if loading object is accessible by Loading jquery method', function() {
+    equal(div.Loading(), undefined, 'Not started elements have undefined loading object');
+    div.loading();
+    ok(div.Loading() instanceof $.Loading, 'Started elements have a valid Loading object');
+    equal(div.Loading().element.attr('id'), 'test-div', 'Loading object has reference to the right element');
   });
 
   test('events and triggers', function() {
@@ -36,7 +43,7 @@
       mustBeTrueClick = true;
       ok(loading instanceof $.Loading, 'Loading object is send as parameter to loading.click handler');
     });
-    div.data('jquery-loading').overlay.trigger('click');
+    div.Loading().overlay.trigger('click');
     ok(mustBeTrueClick, 'click method trigger the loading.click handlers');
   });
 
@@ -44,13 +51,13 @@
     div.loading();
     div.off('loading.start').off('loading.stop');
 
-    equal(div.data('jquery-loading').active(), true, 'Active state is turned on on initialization');
+    equal(div.Loading().active(), true, 'Active state is turned on on initialization');
 
     div.loading('stop');
-    equal(div.data('jquery-loading').active(), false, 'Active state is turned off if stopped, even with events disabled');
+    equal(div.Loading().active(), false, 'Active state is turned off if stopped, even with events disabled');
 
     div.loading('start');
-    equal(div.data('jquery-loading').active(), true, 'Active state is turned on if started, even with events disabled');
+    equal(div.Loading().active(), true, 'Active state is turned on if started, even with events disabled');
   });
 
   test(':loading selector', function() {

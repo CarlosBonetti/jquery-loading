@@ -238,6 +238,15 @@
   };
 
   /**
+   * Return the loading object associated to the element
+   * This method is interesting if you need the plugin object to access the
+   * internal API
+   */
+  $.fn.Loading = function() {
+    return $(this).data(dataAttr);
+  };
+
+  /**
    * Create the `:loading` jQuery selector
    * Return all the jQuery elements with the loading state active
    *
