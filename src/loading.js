@@ -6,6 +6,10 @@
     this.settings.fullPage = this.element.is('body');
 
     this.init();
+
+    if (this.settings.start) {
+      this.start();
+    }
   };
 
   Loading.defaults = {
@@ -30,6 +34,11 @@
      * This options does NOT override the onClick event
      */
     stoppable: false,
+
+    /**
+     * Set to false to not start the loading state when initialized
+     */
+    start: true,
 
     /**
      * Function to be executed when the loading state is started
@@ -67,6 +76,7 @@
      * Initializes the overlay and attach handlers to the appropriate events
      */
     init: function() {
+      this.isActive = false;
       this.initOverlay();
       this.attachMethodsToExternalEvents();
       this.attachOptionsHandlers();
@@ -225,14 +235,15 @@
 
     return this.each(function() {
       var loading = $.data(this, dataAttr);
-      if (!loading) {
-        $.data(this, dataAttr, (loading = new Loading($(this), options)));
-      }
 
-      if (typeof options === 'string') {
-        loading[options].apply(loading, otherArgs);
-      } else {
-        loading.start();
+      if (!loading) { // First call
+        $.data(this, dataAttr, (loading = new Loading($(this), options)));
+      } else { // Already initialized
+        if (typeof options === 'string') {
+          loading[options].apply(loading, otherArgs);
+        } else {
+          loading.start();
+        }
       }
     });
   };

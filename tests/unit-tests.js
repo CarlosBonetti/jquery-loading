@@ -70,4 +70,12 @@
     equal(div.is(':loading'), false, 'Stopped elements return false to selector');
   });
 
+  test('start option', function() {
+    div.loading({
+      start: false
+    });
+
+    equal(div.Loading().active(), false, 'Loading object is not started if `start` options is set to false');
+  });
+
 })(jQuery);
