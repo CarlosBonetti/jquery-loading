@@ -6,12 +6,23 @@
     this.settings.fullPage = this.element.is('body');
 
     this.init();
+
+    if (this.settings.start) {
+      this.start();
+    }
   };
 
   Loading.defaults = {
 
     /**
+     * jQuery element to be used as overlay
+     * If not defined, a default overlay will be created
+     */
+    overlay: undefined,
+
+    /**
      * Message to be rendered on the overlay content
+     * Has no effect if a custom overlay is defined
      */
     message: 'Loading...',
 
@@ -22,6 +33,7 @@
      *  define your own. Just add a `.loading-theme-my_awesome_theme` selector
      *  somewhere with your custom styles and change this option
      *  to 'my_awesome_theme'. The class is applied to the parent overlay div
+     * Has no effect if a custom overlay is defined
      */
     theme: 'light',
 
@@ -30,6 +42,11 @@
      * This options does NOT override the onClick event
      */
     stoppable: false,
+
+    /**
+     * Set to false to not start the loading state when initialized
+     */
+    start: true,
 
     /**
      * Function to be executed when the loading state is started
@@ -64,42 +81,30 @@
   $.extend(Loading.prototype, {
 
     /**
-     * Initializes and create the overlay
+     * Initializes the overlay and attach handlers to the appropriate events
      */
     init: function() {
-      this.initOverlay();
+      this.isActive = false;
+      this.overlay = this.settings.overlay || this.createOverlay();
+      this.resize();
       this.attachMethodsToExternalEvents();
       this.attachOptionsHandlers();
     },
 
     /**
-     * Create the overlay element and the default content
+     * Return a new default overlay (jQuery object)
      */
-    initOverlay: function() {
-      this.overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
-        .css({
-          position: this.settings.fullPage ? 'fixed' : 'absolute',
-          zIndex: 9 + this.settings.fullPage,
-          opacity: 0.7,
-          display: 'table'
-        })
-        .hide();
-
-      this.overlayContent = this.overlay.find('.loading-overlay-content')
-        .css({
-          display: 'table-cell',
-          verticalAlign: 'middle',
-          textAlign: 'center'
-        });
-
-      $('body').prepend(this.overlay);
+    createOverlay: function() {
+      var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
+        .hide()
+        .appendTo('body');
 
       var elementID = this.element.attr('id');
       if (elementID) {
-        this.overlay.attr('id', elementID + '_loading-overlay');
+        overlay.attr('id', elementID + '_loading-overlay');
       }
 
-      this.resize();
+      return overlay;
     },
 
     /**
@@ -118,7 +123,7 @@
 
       // Trigger the `loading.click` event if the overlay is clicked
       self.overlay.on('click', function() {
-        self.element.trigger('loading.click', this);
+        self.element.trigger('loading.click', self);
       });
 
       // Bind the `resize` method to `window.resize`
@@ -158,7 +163,9 @@
      *  or dimension
      */
     resize: function() {
-      var element = this.element,
+      var self = this;
+
+      var element = self.element,
           totalWidth = element.outerWidth(),
           totalHeight = element.outerHeight();
 
@@ -168,6 +175,8 @@
       }
 
       this.overlay.css({
+        position: self.settings.fullPage ? 'fixed' : 'absolute',
+        zIndex: 9 + self.settings.fullPage,
         top: element.offset().top,
         left: element.offset().left,
         width: totalWidth,
@@ -179,6 +188,7 @@
      * Trigger the `loading.start` event and turn on the loading state
      */
     start: function() {
+      this.isActive = true;
       this.element.trigger('loading.start', this);
     },
 
@@ -186,6 +196,7 @@
      * Trigger the `loading.stop` event and turn off the loading state
      */
     stop: function() {
+      this.isActive = false;
       this.element.trigger('loading.stop', this);
     },
 
@@ -193,7 +204,7 @@
      * Check whether the loading state is active or not
      */
     active: function() {
-      return this.overlay.is(':visible');
+      return this.isActive;
     },
 
     /**
@@ -205,13 +216,6 @@
       } else {
         this.start();
       }
-    },
-
-    /**
-     * Change the loading options at runtime
-     */
-    options: function(options) {
-      this.settings = $.extend({}, this.settings, options);
     }
   });
 
@@ -230,20 +234,35 @@
 
     return this.each(function() {
       var loading = $.data(this, dataAttr);
-      if (!loading) {
-        $.data(this, dataAttr, (loading = new Loading($(this), options)));
-      }
 
-      if (typeof options === 'string') {
-        loading[options].apply(loading, otherArgs);
-      } else {
-        loading.start();
+      if (!loading) { // First call
+        $.data(this, dataAttr, (loading = new Loading($(this), options)));
+      } else { // Already initialized
+        if (typeof options === 'string') {
+          loading[options].apply(loading, otherArgs);
+        } else {
+          loading.start();
+        }
       }
     });
   };
 
   /**
+   * Return the loading object associated to the element
+   * This method is interesting if you need the plugin object to access the
+   * internal API
+   */
+  $.fn.Loading = function() {
+    return $(this).data(dataAttr);
+  };
+
+  /**
    * Create the `:loading` jQuery selector
+   * Return all the jQuery elements with the loading state active
+   *
+   * Using the `:not(:loading)` will return all jQuery elements that are not
+   *  loading, event the ones with the plugin not attached.
+   *
    * Examples of use:
    *  `$(':loading')` to get all the elements with the loading state active
    *  `$('#my-element').is(':loading')` to check if the element is loading

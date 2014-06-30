@@ -39,10 +39,14 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      all: ['Gruntfile.js', 'src/**/*.js'],
+      all: ['Gruntfile.js', 'src/**/*.js', 'tests/**/*.js'],
       options: {
         jshintrc: '.jshintrc'
       }
+    },
+
+    qunit: {
+      all: ['tests/unit-tests.html']
     },
 
     uglify: {
@@ -63,6 +67,10 @@ module.exports = function(grunt) {
       lint: {
         files: ['**/*.js'],
         tasks: ['jshint']
+      },
+      test: {
+        files: ['src/**/*.js', 'tests/**/*'],
+        tasks: ['concat', 'qunit']
       }
     }
   });
@@ -70,10 +78,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('build', ['jshint', 'concat']);
+  grunt.registerTask('test', ['jshint', 'concat', 'qunit']);
   grunt.registerTask('min', ['uglify', 'cssmin']);
-  grunt.registerTask('default', ['build', 'min']);
+
+  grunt.registerTask('default', ['jshint', 'concat', 'qunit', 'min']);
 };
