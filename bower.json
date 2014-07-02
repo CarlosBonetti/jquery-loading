@@ -15,5 +15,8 @@
   "homepage": "https://github.com/CarlosBonetti/jquery-loading",
   "ignore": [
     "node_modules"
-  ]
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  }
 }
