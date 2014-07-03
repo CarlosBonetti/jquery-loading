@@ -9,10 +9,10 @@ body {
   margin-bottom: 18px;
   text-align: center;
   color: #fff;
-  font-size: 20px;
+  font-size: 24px;
   background-color: rgb(7, 115, 130);
   background-image: url(background.svg); /* Generated with Trianglify http://qrohlf.com/trianglify/ */
-  background-size: 100%;
+  background-repeat: round;
 }
 
 .site-header-container {
@@ -21,7 +21,7 @@ body {
 
 .site-header h1 {
   margin: 0;
-  font-size: 60px;
+  font-size: 2.5em;
 }
 
 .header-buttons {
@@ -152,5 +152,19 @@ footer {
   }
   87.5% {
     box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 0.2em #ffffff;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .site-header {
+    font-size: 18px;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width:400px) {
+  .site-header {
+    font-size: 16px;
+    height: 250px;
   }
 }
