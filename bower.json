@@ -1,6 +1,6 @@
 {
   "name": "jquery-loading",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easily add and manipulate loading states of any element on the page",
   "keywords": [
     "jquery",

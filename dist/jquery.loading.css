@@ -1,5 +1,5 @@
 /*
- *  jquery-loading - v1.0.2
+ *  jquery-loading - v1.0.3
  *  Easily add and manipulate loading states of any element on the page
  *  http://github.com/CarlosBonetti/jquery-loading
  *
