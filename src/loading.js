@@ -33,6 +33,7 @@
      *  define your own. Just add a `.loading-theme-my_awesome_theme` selector
      *  somewhere with your custom styles and change this option
      *  to 'my_awesome_theme'. The class is applied to the parent overlay div
+     *
      * Has no effect if a custom overlay is defined
      */
     theme: 'light',
@@ -51,6 +52,8 @@
     /**
      * Function to be executed when the loading state is started
      * Receives the loading object as parameter
+     *
+     * The function is attached to the `loading.start` event
      */
     onStart: function(loading) {
       loading.overlay.fadeIn(150);
@@ -59,6 +62,8 @@
     /**
      * Function to be executed when the loading state is stopped
      * Receives the loading object as parameter
+     *
+     * The function is attached to the `loading.stop` event
      */
     onStop: function(loading) {
       loading.overlay.fadeOut(150);
@@ -67,12 +72,15 @@
     /**
      * Function to be executed when the overlay is clicked
      * Receives the loading object as parameter
+     *
+     * The function is attached to the `loading.click` event
      */
     onClick: function() {}
   };
 
   /**
    * Extend the Loading plugin default settings with the user options
+   * Use it as `$.Loading.setDefaults({ ... })`
    */
   Loading.setDefaults = function(options) {
     Loading.defaults = $.extend({}, Loading.defaults, options);
@@ -108,13 +116,13 @@
     },
 
     /**
-     * Attach some methods to external events
+     * Attach some internal methods to external events
      * e.g. overlay click, window resize etc
      */
     attachMethodsToExternalEvents: function() {
       var self = this;
 
-      // Stop loading if the `stoppable` option is set
+      // Attach the 'stop loading on click' behaviour if the `stoppable` option is set
       if (self.settings.stoppable) {
         self.overlay.on('click', function() {
           self.stop();
@@ -132,7 +140,7 @@
       });
 
       // Bind the `resize` method to `document.ready` to guarantee right
-      // positioning and dimensions
+      // positioning and dimensions after the page is loaded
       $(document).on('ready', function() {
         self.resize();
       });
@@ -251,6 +259,7 @@
    * Return the loading object associated to the element
    * This method is interesting if you need the plugin object to access the
    * internal API
+   * Example: `$('#some-element').Loading().toggle()`
    */
   $.fn.Loading = function() {
     return $(this).data(dataAttr);
@@ -261,9 +270,9 @@
    * Return all the jQuery elements with the loading state active
    *
    * Using the `:not(:loading)` will return all jQuery elements that are not
-   *  loading, event the ones with the plugin not attached.
+   *  loading, even the ones with the plugin not attached.
    *
-   * Examples of use:
+   * Examples of usage:
    *  `$(':loading')` to get all the elements with the loading state active
    *  `$('#my-element').is(':loading')` to check if the element is loading
    */
