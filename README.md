@@ -8,15 +8,18 @@ Add and manipulate loading states of any element on the page.
 
 Install it:
 
-```shell
+```sh
 $ bower install jquery-loading
 ```
 
 Include it:
 
 ```html
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="jquery.loading.js"></script>
+
+<!-- [optional] Include the CSS file to use the plugin default themes and loaders -->
+<link href="jquery.loading.css" rel="stylesheet">
 ```
 
 Use it:
