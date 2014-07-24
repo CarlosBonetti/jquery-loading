@@ -236,10 +236,6 @@
    * Create the `loading` jQuery chainable method
    */
   $.fn.loading = function (options) {
-    // Get the other arguments if the plugin was called
-    //  as e.g. `$(...).loading('method', arg1, arg2, ...)`
-    var otherArgs = (arguments.length > 1) ? Array.prototype.slice.call(arguments, 1) : [];
-
     return this.each(function() {
       var loading = $.data(this, dataAttr);
 
@@ -247,7 +243,7 @@
         $.data(this, dataAttr, (loading = new Loading($(this), options)));
       } else { // Already initialized
         if (typeof options === 'string') {
-          loading[options].apply(loading, otherArgs);
+          loading[options].apply(loading);
         } else {
           loading.start();
         }
