@@ -252,13 +252,22 @@
   };
 
   /**
-   * Return the loading object associated to the element
+   * Return the loading object associated to the element or initialize it
    * This method is interesting if you need the plugin object to access the
    * internal API
    * Example: `$('#some-element').Loading().toggle()`
+   *
+   * @param {Object} [options] Initialization options. Considered just on first call
+   * @return {Loading}
    */
-  $.fn.Loading = function() {
-    return $(this).data(dataAttr);
+  $.fn.Loading = function(options) {
+    var loading = $(this).data(dataAttr);
+
+    if (!loading) {
+      $(this).data(dataAttr, loading = new Loading($(this), options));
+    }
+
+    return loading;
   };
 
   /**

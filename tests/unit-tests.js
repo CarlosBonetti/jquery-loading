@@ -15,10 +15,19 @@
   });
 
   test('if loading object is accessible by Loading jquery method', function() {
-    equal(div.Loading(), undefined, 'Not started elements have undefined loading object');
     div.loading();
     ok(div.Loading() instanceof $.Loading, 'Started elements have a valid Loading object');
     equal(div.Loading().element.attr('id'), 'test-div', 'Loading object has reference to the right element');
+  });
+
+  test('Loading jquery method as plugin initializer', function() {
+    var obj = div.Loading();
+    ok(obj instanceof $.Loading, 'Plugin is initialized by first Loading call');
+    equal(div.Loading(), obj, 'Second call to Loading return previously created Loading object');
+
+    equal(obj.active(), true);
+    div.loading('stop');
+    equal(obj.active(), false, 'loading() function has access to same object created by Loading()');
   });
 
   test('events and triggers', function() {
