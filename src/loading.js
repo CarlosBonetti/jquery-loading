@@ -81,6 +81,8 @@
   /**
    * Extend the Loading plugin default settings with the user options
    * Use it as `$.Loading.setDefaults({ ... })`
+   *
+   * @param {Object} options Custom options to override the plugin defaults
    */
   Loading.setDefaults = function(options) {
     Loading.defaults = $.extend({}, Loading.defaults, options);
@@ -100,7 +102,9 @@
     },
 
     /**
-     * Return a new default overlay (jQuery object)
+     * Return a new default overlay
+     *
+     * @return {jQuery} A new overlay already appended to the page's body
      */
     createOverlay: function() {
       var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
@@ -210,6 +214,8 @@
 
     /**
      * Check whether the loading state is active or not
+     *
+     * @return {Boolean}
      */
     active: function() {
       return this.isActive;
@@ -233,7 +239,10 @@
   var dataAttr = 'jquery-loading';
 
   /**
-   * Create the `loading` jQuery chainable method
+   * Initializes the plugin and return a chainable jQuery object
+   *
+   * @param {Object} [options] Initialization options. Extends `Loading.defaults`
+   * @return {jQuery}
    */
   $.fn.loading = function (options) {
     return this.each(function() {
