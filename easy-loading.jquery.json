@@ -7,6 +7,7 @@
     "jquery",
     "overlay",
     "loading",
+    "loader",
     "ajax"
   ],
   "author": {
