@@ -87,4 +87,34 @@
     equal(div.Loading().active(), false, 'Loading object is not started if `start` options is set to false');
   });
 
+  test('if shownClass is applied to overlay elements', function() {
+    var shownClass = $.Loading.defaults.shownClass;
+    var obj = div.Loading();
+
+    ok(!obj.createOverlay().hasClass(shownClass), '`shownClass` is not applied to the default overlay when it is created');
+
+    ok(obj.overlay.hasClass($.Loading.defaults.shownClass), '`shownClass` is applied to overlay at initialization');
+
+    div.loading('stop');
+    ok(!obj.overlay.hasClass($.Loading.defaults.shownClass), '`shownClass` is removed from overlay when loading state is stopped');
+
+    div.loading('start');
+    ok(obj.overlay.hasClass($.Loading.defaults.shownClass), '`shownClass` is applied to overlay when loading state is started again');
+  });
+
+  test('if hiddenClass is applied to overlay elements', function() {
+    var hiddenClass = $.Loading.defaults.hiddenClass;
+    var obj = div.Loading();
+
+    ok(obj.createOverlay().hasClass(hiddenClass), '`hiddenClass` is applied to the default overlay when it is created');
+
+    ok(!obj.overlay.hasClass(hiddenClass), '`hiddenClass` is applied to overlay at initialization');
+
+    div.loading('stop');
+    ok(obj.overlay.hasClass(hiddenClass), '`hiddenClass` is applied to overlay when loading state is stopped');
+
+    div.loading('start');
+    ok(!obj.overlay.hasClass(hiddenClass), '`hiddenClass` is removed from overlay when loading state is started again');
+  });
+
 })(jQuery);

@@ -39,6 +39,16 @@
     theme: 'light',
 
     /**
+     * Class(es) to be applied to the overlay element when the loading state is started
+     */
+    shownClass: 'loading-shown',
+
+    /**
+     * Class(es) to be applied to the overlay element when the loading state is stopped
+     */
+    hiddenClass: 'loading-hidden',
+
+    /**
      * Set to true to stop the loading state if the overlay is clicked
      * This options does NOT override the onClick event
      */
@@ -108,6 +118,7 @@
      */
     createOverlay: function() {
       var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
+        .addClass(this.settings.hiddenClass)
         .hide()
         .appendTo('body');
 
@@ -125,6 +136,22 @@
      */
     attachMethodsToExternalEvents: function() {
       var self = this;
+
+      // Add `shownClass` and remove `hiddenClass` from overlay when loading state
+      // is activated
+      self.element.on('loading.start', function() {
+        self.overlay
+          .removeClass(self.settings.hiddenClass)
+          .addClass(self.settings.shownClass);
+      });
+
+      // Add `hiddenClass` and remove `shownClass` from overlay when loading state
+      // is stopped
+      self.element.on('loading.stop', function() {
+        self.overlay
+          .removeClass(self.settings.shownClass)
+          .addClass(self.settings.hiddenClass);
+      });
 
       // Attach the 'stop loading on click' behaviour if the `stoppable` option is set
       if (self.settings.stoppable) {
