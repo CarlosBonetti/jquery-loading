@@ -478,7 +478,7 @@ $('#loading-custom-message').loading({
           <td><code>jQuery.fn.Loading</code></td>
           <td><code>Loading</code></td>
           <td>
-            Access the internal plugin object associated to the jQuery element. Note that this is different from the common <code>$.fn.loading</code> wich start the plugin and return a chainable jQuery object.
+            Return the internal plugin object associated to the jQuery element. Also initialize the plugin if this the first call using this target. Note that this function is different from the common <code>$.fn.loading</code> wich start the plugin and return a chainable jQuery object.
           </td>
           <td>
             <code>$('#my-loading-element').Loading()</code>
