@@ -215,7 +215,7 @@
 
       this.overlay.css({
         position: self.settings.fullPage ? 'fixed' : 'absolute',
-        zIndex: 9 + self.settings.fullPage,
+        zIndex: (parseInt(element.css('z-index')) || 0) + 1 + self.settings.fullPage,
         top: element.offset().top,
         left: element.offset().left,
         width: totalWidth,
