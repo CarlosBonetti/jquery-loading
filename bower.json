@@ -17,6 +17,7 @@
   "ignore": [
     "node_modules"
   ],
+  "main": ["dist/jquery.loading.min.css","dist/jquery.loading.min.js"],
   "dependencies": {
     "jquery": ">=1.7.0"
   }
