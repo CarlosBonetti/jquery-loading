@@ -2,11 +2,12 @@
 
 ;(function ($, undefined) {
 
-  var div;
+  var div, div2;
 
   module('All tests', {
     setup: function() {
       div = $('<div id="test-div">Test div</div>');
+      div2 = $('<div style="z-index: 100">Test div #2</div>');
     }
   });
 
@@ -115,6 +116,21 @@
 
     div.loading('start');
     ok(!obj.overlay.hasClass(hiddenClass), '`hiddenClass` is removed from overlay when loading state is started again');
+  });
+
+  test('if overlay detects z-index of the target element', function() {
+    var load = div.Loading();
+    equal(load.overlay.css('z-index'), 1, 'Overlay z-index set to 1 if target has no index defined');
+
+    var bodyLoad = $('body').Loading();
+    equal(bodyLoad.overlay.css('z-index'), 2, 'Body overlay z-index set to 2 if body has no index defined');
+
+    var load2 = div2.Loading();
+    equal(load2.overlay.css('z-index'), 101, 'Overlay z-index set to target z-index + 1');
+
+    div2.css('z-index', 50);
+    load2.resize();
+    equal(load2.overlay.css('z-index'), 51, 'Overlay z-index changed if target element changed');
   });
 
 })(jQuery);
