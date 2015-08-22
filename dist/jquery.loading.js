@@ -1,5 +1,5 @@
 /*
- *  jquery-loading - v1.0.3
+ *  jquery-loading - v1.1.0
  *  Easily add and manipulate loading states of any element on the page
  *  http://github.com/CarlosBonetti/jquery-loading
  *
@@ -41,9 +41,20 @@
      *  define your own. Just add a `.loading-theme-my_awesome_theme` selector
      *  somewhere with your custom styles and change this option
      *  to 'my_awesome_theme'. The class is applied to the parent overlay div
+     *
      * Has no effect if a custom overlay is defined
      */
     theme: 'light',
+
+    /**
+     * Class(es) to be applied to the overlay element when the loading state is started
+     */
+    shownClass: 'loading-shown',
+
+    /**
+     * Class(es) to be applied to the overlay element when the loading state is stopped
+     */
+    hiddenClass: 'loading-hidden',
 
     /**
      * Set to true to stop the loading state if the overlay is clicked
@@ -59,6 +70,8 @@
     /**
      * Function to be executed when the loading state is started
      * Receives the loading object as parameter
+     *
+     * The function is attached to the `loading.start` event
      */
     onStart: function(loading) {
       loading.overlay.fadeIn(150);
@@ -67,6 +80,8 @@
     /**
      * Function to be executed when the loading state is stopped
      * Receives the loading object as parameter
+     *
+     * The function is attached to the `loading.stop` event
      */
     onStop: function(loading) {
       loading.overlay.fadeOut(150);
@@ -75,12 +90,17 @@
     /**
      * Function to be executed when the overlay is clicked
      * Receives the loading object as parameter
+     *
+     * The function is attached to the `loading.click` event
      */
     onClick: function() {}
   };
 
   /**
    * Extend the Loading plugin default settings with the user options
+   * Use it as `$.Loading.setDefaults({ ... })`
+   *
+   * @param {Object} options Custom options to override the plugin defaults
    */
   Loading.setDefaults = function(options) {
     Loading.defaults = $.extend({}, Loading.defaults, options);
@@ -100,10 +120,13 @@
     },
 
     /**
-     * Return a new default overlay (jQuery object)
+     * Return a new default overlay
+     *
+     * @return {jQuery} A new overlay already appended to the page's body
      */
     createOverlay: function() {
       var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
+        .addClass(this.settings.hiddenClass)
         .hide()
         .appendTo('body');
 
@@ -116,13 +139,29 @@
     },
 
     /**
-     * Attach some methods to external events
+     * Attach some internal methods to external events
      * e.g. overlay click, window resize etc
      */
     attachMethodsToExternalEvents: function() {
       var self = this;
 
-      // Stop loading if the `stoppable` option is set
+      // Add `shownClass` and remove `hiddenClass` from overlay when loading state
+      // is activated
+      self.element.on('loading.start', function() {
+        self.overlay
+          .removeClass(self.settings.hiddenClass)
+          .addClass(self.settings.shownClass);
+      });
+
+      // Add `hiddenClass` and remove `shownClass` from overlay when loading state
+      // is stopped
+      self.element.on('loading.stop', function() {
+        self.overlay
+          .removeClass(self.settings.shownClass)
+          .addClass(self.settings.hiddenClass);
+      });
+
+      // Attach the 'stop loading on click' behaviour if the `stoppable` option is set
       if (self.settings.stoppable) {
         self.overlay.on('click', function() {
           self.stop();
@@ -140,7 +179,7 @@
       });
 
       // Bind the `resize` method to `document.ready` to guarantee right
-      // positioning and dimensions
+      // positioning and dimensions after the page is loaded
       $(document).on('ready', function() {
         self.resize();
       });
@@ -184,7 +223,7 @@
 
       this.overlay.css({
         position: self.settings.fullPage ? 'fixed' : 'absolute',
-        zIndex: 9 + self.settings.fullPage,
+        zIndex: (parseInt(element.css('z-index')) || 0) + 1 + self.settings.fullPage,
         top: element.offset().top,
         left: element.offset().left,
         width: totalWidth,
@@ -210,6 +249,8 @@
 
     /**
      * Check whether the loading state is active or not
+     *
+     * @return {Boolean}
      */
     active: function() {
       return this.isActive;
@@ -233,35 +274,54 @@
   var dataAttr = 'jquery-loading';
 
   /**
-   * Create the `loading` jQuery chainable method
+   * Initializes the plugin and return a chainable jQuery object
+   *
+   * @param {Object} [options] Initialization options. Extends `Loading.defaults`
+   * @return {jQuery}
    */
   $.fn.loading = function (options) {
-    // Get the other arguments if the plugin was called
-    //  as e.g. `$(...).loading('method', arg1, arg2, ...)`
-    var otherArgs = (arguments.length > 1) ? Array.prototype.slice.call(arguments, 1) : [];
-
     return this.each(function() {
       var loading = $.data(this, dataAttr);
 
-      if (!loading) { // First call
+      if (!loading) {
+        // First call. Initialize and save plugin object
         $.data(this, dataAttr, (loading = new Loading($(this), options)));
-      } else { // Already initialized
-        if (typeof options === 'string') {
-          loading[options].apply(loading, otherArgs);
-        } else {
+      } else {
+        // Already initialized
+        if (options === undefined) {
+          // $(...).loading() call. Call the 'start' by default
           loading.start();
+        } else if (typeof options === 'string') {
+          // $(...).loading('method') call. Execute 'method'
+          loading[options].apply(loading);
+        } else {
+          // $(...).loading({...}) call. New configurations. Reinitialize
+          // plugin object of new config options and start the plugin
+          $.data(this, dataAttr, (loading = new Loading($(this), options)));
         }
       }
     });
   };
 
   /**
-   * Return the loading object associated to the element
+   * Return the loading object associated to the element or initialize it
    * This method is interesting if you need the plugin object to access the
    * internal API
+   * Example: `$('#some-element').Loading().toggle()`
+   *
+   * @param {Object} [options] Initialization options. If new options are given
+   * to a previously initialized object, the old ones are overriden and the
+   * plugin restarded
+   * @return {Loading}
    */
-  $.fn.Loading = function() {
-    return $(this).data(dataAttr);
+  $.fn.Loading = function(options) {
+    var loading = $(this).data(dataAttr);
+
+    if (!loading || options !== undefined) {
+      $(this).data(dataAttr, (loading = new Loading($(this), options)));
+    }
+
+    return loading;
   };
 
   /**
@@ -269,9 +329,9 @@
    * Return all the jQuery elements with the loading state active
    *
    * Using the `:not(:loading)` will return all jQuery elements that are not
-   *  loading, event the ones with the plugin not attached.
+   *  loading, even the ones with the plugin not attached.
    *
-   * Examples of use:
+   * Examples of usage:
    *  `$(':loading')` to get all the elements with the loading state active
    *  `$('#my-element').is(':loading')` to check if the element is loading
    */
