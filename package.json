@@ -9,6 +9,9 @@
     "loader",
     "ajax"
   ],
+  "scripts": {
+    "test": "grunt test"
+  },
   "author": "Carlos Bonetti",
   "license": "MIT",
   "url": "http://github.com/CarlosBonetti/jquery-loading",

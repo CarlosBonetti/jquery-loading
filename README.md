@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/CarlosBonetti/jquery-loading.svg)](https://travis-ci.org/CarlosBonetti/jquery-loading)
+
 # jquery-loading
 
 Add and manipulate loading states of any element on the page.
