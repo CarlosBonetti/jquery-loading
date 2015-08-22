@@ -275,13 +275,21 @@
     return this.each(function() {
       var loading = $.data(this, dataAttr);
 
-      if (!loading) { // First call
+      if (!loading) {
+        // First call. Initialize and save plugin object
         $.data(this, dataAttr, (loading = new Loading($(this), options)));
-      } else { // Already initialized
-        if (typeof options === 'string') {
+      } else {
+        // Already initialized
+        if (options === undefined) {
+          // $(...).loading() call. Call the 'start' by default
+          loading.start();
+        } else if (typeof options === 'string') {
+          // $(...).loading('method') call. Execute 'method'
           loading[options].apply(loading);
         } else {
-          loading.start();
+          // $(...).loading({...}) call. New configurations. Reinitialize
+          // plugin object of new config options and start the plugin
+          $.data(this, dataAttr, (loading = new Loading($(this), options)));
         }
       }
     });
@@ -293,14 +301,16 @@
    * internal API
    * Example: `$('#some-element').Loading().toggle()`
    *
-   * @param {Object} [options] Initialization options. Considered just on first call
+   * @param {Object} [options] Initialization options. If new options are given
+   * to a previously initialized object, the old ones are overriden and the
+   * plugin restarded
    * @return {Loading}
    */
   $.fn.Loading = function(options) {
     var loading = $(this).data(dataAttr);
 
-    if (!loading) {
-      $(this).data(dataAttr, loading = new Loading($(this), options));
+    if (!loading || options !== undefined) {
+      $(this).data(dataAttr, (loading = new Loading($(this), options)));
     }
 
     return loading;

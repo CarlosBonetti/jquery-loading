@@ -31,6 +31,35 @@
     equal(obj.active(), false, 'loading() function has access to same object created by Loading()');
   });
 
+  test('if subsequent calls of Loading with new config options reinitialize the plugin object', function() {
+    // Using $.fn.Loading
+    var obj1 = div.Loading({
+      message: 'First call'
+    });
+
+    var obj2 = div.Loading({
+      message: 'Second call'
+    });
+    notEqual(obj1, obj2, 'Underlying plugin object should change');
+    equal(obj2.settings.message, 'Second call', 'New config options should be considered');
+  });
+
+  test('if subsequent calls of loading with new config options reinitialize the plugin object', function() {
+    // Using $.fn.loading
+    div.loading({
+      message: 'First call'
+    });
+    var obj1 = div.data('jquery-loading');
+
+    div.loading({
+      message: 'Second call'
+    });
+    var obj2 = div.data('jquery-loading');
+
+    notEqual(obj1, obj2, 'Underlying plugin object should change');
+    equal(obj2.settings.message, 'Second call', 'New config options should be considered');
+  });
+
   test('events and triggers', function() {
     var mustBeTrueStart = false;
     div.on('loading.start', function(event, loading) {

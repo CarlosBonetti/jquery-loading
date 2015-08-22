@@ -151,12 +151,22 @@
 
       <div>
         <button id="loading-body-btn" class="btn btn-primary btn-block">Click me to add a loading state to the page's body</button>
+
+        <button id="loading-body2-btn" class="btn btn-primary btn-block">Second body loading, different configs</button>
       </div>
 
       <script>
         $('#loading-body-btn').click(function() {
           $('body').loading({
             stoppable: true
+          });
+        });
+
+        $('#loading-body2-btn').click(function() {
+          $('body').loading({
+            stoppable: true,
+            message: 'Body loading, another message...',
+            theme: 'dark'
           });
         });
       </script>
