@@ -4,18 +4,24 @@
   "description": "Easily add and manipulate loading states of any element on the page",
   "keywords": [
     "jquery",
+    "jquery-plugin",
+    "ecosystem:jquery",
     "overlay",
     "loading",
     "loader",
     "ajax"
   ],
+  "author": "Carlos Bonetti <carlosb_bc@hotmail.com>",
+  "license": "MIT",
+  "url": "http://github.com/CarlosBonetti/jquery-loading",
+  "repository": "http://github.com/CarlosBonetti/jquery-loading",
+  "homepage": "http://carlosbonetti.github.io/jquery-loading/",
   "scripts": {
     "test": "grunt test"
   },
-  "author": "Carlos Bonetti",
-  "license": "MIT",
-  "url": "http://github.com/CarlosBonetti/jquery-loading",
-  "homepage": "http://carlosbonetti.github.io/jquery-loading/",
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
