@@ -11,8 +11,11 @@ body {
   color: #fff;
   font-size: 24px;
   background-color: rgb(7, 115, 130);
-  background-image: url(background.svg); /* Generated with Trianglify http://qrohlf.com/trianglify/ */
-  background-repeat: round;
+  background: url(background.svg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .site-header-container {
