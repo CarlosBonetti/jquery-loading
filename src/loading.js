@@ -21,6 +21,14 @@
     overlay: undefined,
 
     /**
+     * z-index to be used by the default overlay
+     * If not defined, a z-index will be calculated based on the
+     * target's z-index
+     * Has no effect if a custom overlay is defined
+     */
+    zIndex: undefined,
+
+    /**
      * Message to be rendered on the overlay content
      * Has no effect if a custom overlay is defined
      */
@@ -197,6 +205,19 @@
     },
 
     /**
+     * Calculate the z-index for the default overlay element
+     * Return the z-index passed as setting to the plugin or calculate it
+     * based on the target's z-index
+     */
+    calcZIndex: function() {
+      if (this.settings.zIndex !== undefined) {
+        return this.settings.zIndex;
+      } else {
+        return (parseInt(this.element.css('z-index')) || 0) + 1 + this.settings.fullPage;
+      }
+    },
+
+    /**
      * Reposition the overlay on the top of the target element
      * This method needs to be called if the target element changes position
      *  or dimension
@@ -215,7 +236,7 @@
 
       this.overlay.css({
         position: self.settings.fullPage ? 'fixed' : 'absolute',
-        zIndex: (parseInt(element.css('z-index')) || 0) + 1 + self.settings.fullPage,
+        zIndex: self.calcZIndex(),
         top: element.offset().top,
         left: element.offset().left,
         width: totalWidth,

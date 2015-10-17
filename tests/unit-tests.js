@@ -162,4 +162,16 @@
     equal(load2.overlay.css('z-index'), 51, 'Overlay z-index changed if target element changed');
   });
 
+  test('if zIndex option is used by the default plugin\'s overlay', function() {
+    var obj = div.Loading({
+      zIndex: 42
+    });
+    equal(obj.overlay.css('z-index'), 42, 'Overlay z-index should be the one passed as plugin setting');
+
+    obj = div2.Loading({
+      zIndex: 1e5
+    });
+    equal(obj.overlay.css('z-index'), 1e5, 'Overlay z-index should be the one passed as plugin setting');
+  });
+
 })(jQuery);
