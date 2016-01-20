@@ -1,12 +1,42 @@
 /*
- *  jquery-loading - v1.1.0
+ *  jquery-easy-loading - v1.1.1
  *  Easily add and manipulate loading states of any element on the page
  *  http://github.com/CarlosBonetti/jquery-loading
  *
- *  Made by Carlos Bonetti
+ *  Made by Carlos Bonetti <carlosb_bc@hotmail.com>
  *  Under MIT License
  */
-;(function($, window, undefined) {
+(function(factory) {
+  // UMD export
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+      define(['jquery'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // Node/CommonJS
+    module.exports = function(root, jQuery) {
+      var w; // Holds the window or root instance to pass to the plugin
+      if (jQuery === undefined) {
+        // require('jQuery') returns a factory that requires window to
+        // build a jQuery instance, we normalize how we use modules
+        // that require this pattern but the window provided is a noop
+        // if it's defined (how jquery works)
+        if (typeof window !== 'undefined') {
+            jQuery = require('jquery');
+            w = window;
+        }
+        else {
+            jQuery = require('jquery')(root);
+            w = root;
+        }
+      }
+      factory(jQuery, w);
+      return jQuery;
+    };
+  } else {
+    // Browser globals
+    factory(jQuery, window);
+  }
+}(function($, window, undefined) {
 
   var Loading = function(element, options) {
     this.element = element;
@@ -27,6 +57,14 @@
      * If not defined, a default overlay will be created
      */
     overlay: undefined,
+
+    /**
+     * z-index to be used by the default overlay
+     * If not defined, a z-index will be calculated based on the
+     * target's z-index
+     * Has no effect if a custom overlay is defined
+     */
+    zIndex: undefined,
 
     /**
      * Message to be rendered on the overlay content
@@ -180,7 +218,7 @@
 
       // Bind the `resize` method to `document.ready` to guarantee right
       // positioning and dimensions after the page is loaded
-      $(document).on('ready', function() {
+      $(function() {
         self.resize();
       });
     },
@@ -205,6 +243,19 @@
     },
 
     /**
+     * Calculate the z-index for the default overlay element
+     * Return the z-index passed as setting to the plugin or calculate it
+     * based on the target's z-index
+     */
+    calcZIndex: function() {
+      if (this.settings.zIndex !== undefined) {
+        return this.settings.zIndex;
+      } else {
+        return (parseInt(this.element.css('z-index')) || 0) + 1 + this.settings.fullPage;
+      }
+    },
+
+    /**
      * Reposition the overlay on the top of the target element
      * This method needs to be called if the target element changes position
      *  or dimension
@@ -223,7 +274,7 @@
 
       this.overlay.css({
         position: self.settings.fullPage ? 'fixed' : 'absolute',
-        zIndex: (parseInt(element.css('z-index')) || 0) + 1 + self.settings.fullPage,
+        zIndex: self.calcZIndex(),
         top: element.offset().top,
         left: element.offset().left,
         width: totalWidth,
@@ -347,4 +398,4 @@
 
   $.Loading = Loading;
 
-})(jQuery, window);
+}));
