@@ -1,0 +1,10 @@
+node_modules
+demo
+tests
+src
+.editorconfig
+.jshintrc
+.travis.yml
+bower.json
+Gruntfile.js
+.gitignore

@@ -16,10 +16,12 @@
   "url": "http://github.com/CarlosBonetti/jquery-loading",
   "repository": "http://github.com/CarlosBonetti/jquery-loading",
   "homepage": "http://carlosbonetti.github.io/jquery-loading/",
+  "main": "./dist/jquery.loading.js",
+  "style": ["./dist/jquery.loading.css"],
   "scripts": {
     "test": "grunt test"
   },
-  "dependencies": {
+  "peerDependencies": {
     "jquery": ">=1.7"
   },
   "devDependencies": {
