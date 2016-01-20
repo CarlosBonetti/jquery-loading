@@ -1,7 +1,4 @@
-// See: http://jshint.com/docs/options/
-
 {
-  // Enforcing options
   "curly": true,
   "eqeqeq": true,
   "immed": true,
@@ -14,13 +11,9 @@
   "undef": true,
   "unused": true,
   "trailing": true,
-
-  // Relaxing options
   "boss": true,
   "expr": true,
   "smarttabs": true,
-
-  // Environments options
   "browser": true,
   "jquery": true,
   "node": true
