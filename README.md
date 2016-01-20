@@ -8,10 +8,16 @@ Add and manipulate loading states of any element on the page.
 
 ## Getting started
 
-Install it:
+Install it, using [Bower](http://bower.io/):
 
 ```sh
 $ bower install jquery-loading
+```
+
+Or using [npm](https://www.npmjs.com/):
+
+```sh
+$ npm install --save jquery-easy-loading
 ```
 
 Include it:
@@ -25,6 +31,7 @@ Include it:
 ```
 
 Use it:
+
 ```javascript
 $("#some-element").loading();
 ```
