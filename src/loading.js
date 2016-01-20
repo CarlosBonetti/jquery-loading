@@ -180,7 +180,7 @@
 
       // Bind the `resize` method to `document.ready` to guarantee right
       // positioning and dimensions after the page is loaded
-      $(document).on('ready', function() {
+      $(function() {
         self.resize();
       });
     },
