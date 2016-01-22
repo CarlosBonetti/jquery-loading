@@ -66,7 +66,7 @@
       mustBeTrueStart = true;
       ok(loading instanceof $.Loading, 'Loading object is send as parameter to loading.start handler');
     });
-    div.loading('start');
+    div.loading();
     ok(mustBeTrueStart, 'start method trigger the loading.start handlers');
 
     var mustBeTrueStop = false;
@@ -172,6 +172,21 @@
       zIndex: 1e5
     });
     equal(obj.overlay.css('z-index'), 1e5, 'Overlay z-index should be the one passed as plugin setting');
+  });
+
+  test('first call with different argument types and values', function() {
+    var div3 = $('<span></span>');
+    var div4 = $('<div></div>');
+    var div5 = $('<p></p>');
+    var div6 = $('<div></div>');
+
+    ok(div.loading().data('jquery-loading'));
+    ok(div2.loading({}).data('jquery-loading'));
+    ok(div3.loading('start').data('jquery-loading'));
+    ok(div4.loading('toggle').data('jquery-loading'));
+
+    ok(!div5.loading('stop').data('jquery-loading'));
+    ok(!div6.loading('test').data('jquery-loading'));
   });
 
 })(jQuery);

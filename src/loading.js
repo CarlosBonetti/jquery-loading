@@ -324,11 +324,17 @@
    */
   $.fn.loading = function (options) {
     return this.each(function() {
+      // (Try to) retrieve an existing plugin object associated with element
       var loading = $.data(this, dataAttr);
 
       if (!loading) {
         // First call. Initialize and save plugin object
-        $.data(this, dataAttr, (loading = new Loading($(this), options)));
+        if (options === undefined || typeof options === 'object' ||
+            options === 'start' || options === 'toggle') {
+          // Initialize it just if argument is undefined, a config object
+          // or a direct call to 'start' or 'toggle' methods
+          $.data(this, dataAttr, new Loading($(this), options));
+        }
       } else {
         // Already initialized
         if (options === undefined) {
@@ -339,8 +345,8 @@
           loading[options].apply(loading);
         } else {
           // $(...).loading({...}) call. New configurations. Reinitialize
-          // plugin object of new config options and start the plugin
-          $.data(this, dataAttr, (loading = new Loading($(this), options)));
+          // plugin object with new config options and start the plugin
+          $.data(this, dataAttr, new Loading($(this), options));
         }
       }
     });
@@ -354,7 +360,7 @@
    *
    * @param {Object} [options] Initialization options. If new options are given
    * to a previously initialized object, the old ones are overriden and the
-   * plugin restarded
+   * plugin restarted
    * @return {Loading}
    */
   $.fn.Loading = function(options) {
