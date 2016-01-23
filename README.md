@@ -26,7 +26,7 @@ Include it:
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="jquery.loading.js"></script>
 
-<!-- [optional] Include the CSS file to use the plugin default themes and loaders -->
+<!-- Include the CSS file to use the plugin default themes and loaders -->
 <link href="jquery.loading.css" rel="stylesheet">
 ```
 
