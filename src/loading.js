@@ -308,7 +308,15 @@
       } else {
         this.start();
       }
+    },
+    
+    /**
+     * Destroy plugin instance.
+     */    
+    destroy: function(){
+    	this.overlay.remove();
     }
+    
   });
 
   /**
