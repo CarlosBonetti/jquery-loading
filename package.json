@@ -17,7 +17,9 @@
   "repository": "http://github.com/CarlosBonetti/jquery-loading",
   "homepage": "http://carlosbonetti.github.io/jquery-loading/",
   "main": "./dist/jquery.loading.js",
-  "style": ["./dist/jquery.loading.css"],
+  "style": [
+    "./dist/jquery.loading.css"
+  ],
   "scripts": {
     "test": "grunt test"
   },
@@ -27,14 +29,14 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
-    "grunt-contrib-concat": "^0.4.0",
-    "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-qunit": "^0.5.2",
-    "grunt-contrib-uglify": "^0.5.0",
-    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-qunit": "^1.2.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
     "jquery": "^1.11.1",
-    "jshint": "^2.9.1",
-    "qunitjs": "^1.14.0"
+    "jshint": "^2.9.4",
+    "qunitjs": "^2.0.1"
   }
 }
