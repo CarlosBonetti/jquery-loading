@@ -279,6 +279,7 @@
      */
     start: function() {
       this.isActive = true;
+      this.resize();
       this.element.trigger('loading.start', this);
     },
 
@@ -308,7 +309,15 @@
       } else {
         this.start();
       }
+    },
+    
+    /**
+     * Destroy plugin instance.
+     */    
+    destroy: function(){
+    	this.overlay.remove();
     }
+    
   });
 
   /**
