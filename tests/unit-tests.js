@@ -8,6 +8,10 @@
     beforeEach: function() {
       div = $('<div id="test-div">Test div</div>');
       div2 = $('<div style="z-index: 100">Test div #2</div>');
+    },
+    afterEach: function() {
+      div.loading('destroy');
+      div2.loading('destroy');
     }
   });
 
@@ -187,6 +191,15 @@
 
     assert.ok(!div5.loading('stop').data('jquery-loading'));
     assert.ok(!div6.loading('test').data('jquery-loading'));
+  });
+
+  QUnit.test('destroy method should remove overlay from DOM', function(assert) {
+    div.loading();
+    div.loading('stop');
+    assert.ok(div.Loading().overlay.parents('body').length, 'Overlay should be kept attached to body when loading just stopped');
+
+    div.loading('destroy');
+    assert.ok(!div.Loading().overlay.parents('body').length, 'Overlay should be removed from body when loading destroyed');
   });
 
 })(jQuery);

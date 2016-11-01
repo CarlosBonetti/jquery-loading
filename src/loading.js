@@ -310,14 +310,14 @@
         this.start();
       }
     },
-    
+
     /**
      * Destroy plugin instance.
-     */    
-    destroy: function(){
+     */
+    destroy: function() {
     	this.overlay.remove();
     }
-    
+
   });
 
   /**
