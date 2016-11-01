@@ -287,6 +287,7 @@
      */
     start: function() {
       this.isActive = true;
+      this.resize();
       this.element.trigger('loading.start', this);
     },
 
