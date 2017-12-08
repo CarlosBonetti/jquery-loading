@@ -196,10 +196,18 @@
   QUnit.test('destroy method should remove overlay from DOM', function(assert) {
     div.loading();
     div.loading('stop');
-    assert.ok(div.Loading().overlay.parents('body').length, 'Overlay should be kept attached to body when loading just stopped');
+    assert.equal(div.Loading().overlay.parents('body').length, 1, 'Overlay should be kept attached to body when loading just stopped');
 
     div.loading('destroy');
-    assert.ok(!div.Loading().overlay.parents('body').length, 'Overlay should be removed from body when loading destroyed');
+    assert.equal(div.Loading().overlay.parents('body').length, 0, 'Overlay should be removed from body when loading destroyed');
   });
 
+  QUnit.test('when new settings are passed to element already initialized', function(assert) {
+    div.loading();
+    var overlay1 = div.Loading().overlay;
+
+    div.loading({ message: 'Second message' });
+    assert.equal(overlay1.parents('body').length, 0, 'Old overlay should be destroyed');
+    assert.equal(div.Loading().overlay.text(), 'Second message', 'New config should be used');
+  });
 })(jQuery);

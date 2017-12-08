@@ -342,6 +342,8 @@
         } else {
           // $(...).loading({...}) call. New configurations. Reinitialize
           // plugin object with new config options and start the plugin
+          // Also, destroy the old overlay instance
+          loading.destroy();
           $.data(this, dataAttr, new Loading($(this), options));
         }
       }
