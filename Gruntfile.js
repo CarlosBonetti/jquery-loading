@@ -60,17 +60,13 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      build: {
-        files: ['src/**/*.js', 'src/**/*.css'],
-        tasks: ['concat']
-      },
       lint: {
         files: ['**/*.js'],
         tasks: ['jshint']
       },
       test: {
         files: ['src/**/*.js', 'tests/**/*'],
-        tasks: ['concat', 'qunit']
+        tasks: ['qunit']
       }
     }
   });
@@ -82,9 +78,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('build', ['jshint', 'concat']);
-  grunt.registerTask('test', ['jshint', 'concat', 'qunit']);
-  grunt.registerTask('min', ['uglify', 'cssmin']);
+  grunt.registerTask('test', ['jshint', 'qunit']);
+  grunt.registerTask('build', ['test', 'concat', 'uglify', 'cssmin']);
 
-  grunt.registerTask('default', ['jshint', 'concat', 'qunit', 'min']);
+  grunt.registerTask('default', ['build']);
 };

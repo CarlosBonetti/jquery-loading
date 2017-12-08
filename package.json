@@ -21,6 +21,8 @@
     "./dist/jquery.loading.css"
   ],
   "scripts": {
+    "start": "grunt watch",
+    "build": "grunt",
     "test": "grunt test"
   },
   "peerDependencies": {
