@@ -1,34 +1,21 @@
 (function(factory) {
-  // UMD export
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-      define(['jquery'], factory);
-  } else if (typeof module === 'object' && module.exports) {
-    // Node/CommonJS
-    module.exports = function(root, jQuery) {
-      var w; // Holds the window or root instance to pass to the plugin
-      if (jQuery === undefined) {
-        // require('jQuery') returns a factory that requires window to
-        // build a jQuery instance, we normalize how we use modules
-        // that require this pattern but the window provided is a noop
-        // if it's defined (how jquery works)
-        if (typeof window !== 'undefined') {
-            jQuery = require('jquery');
-            w = window;
-        }
-        else {
-            jQuery = require('jquery')(root);
-            w = root;
-        }
-      }
-      factory(jQuery, w);
-      return jQuery;
-    };
+  'use strict';
+  
+  if (typeof window !== 'undefined') {
+    if (typeof define === 'function' && define.amd) {
+      // AMD
+      define(['jquery', window], factory);
+    } else if (typeof exports === 'object') {
+      // CommonJS
+      factory(require('jquery'), window);
+    } else {
+      // Browser globals
+      factory(jQuery, window);
+    }
   } else {
-    // Browser globals
-    factory(jQuery, window);
+    throw new Error('Could not find DOM window object.');
   }
-}(function($, window, undefined) {
+})(function($, window, undefined) {
 
   var Loading = function(element, options) {
     this.element = element;
@@ -405,4 +392,4 @@
 
   $.Loading = Loading;
 
-}));
+});
