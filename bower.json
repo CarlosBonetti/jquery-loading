@@ -1,6 +1,5 @@
 {
   "name": "jquery-loading",
-  "version": "1.2.0",
   "description": "Easily add and manipulate loading states of any element on the page",
   "keywords": [
     "jquery",
@@ -17,7 +16,7 @@
   "ignore": [
     "node_modules"
   ],
-  "main": ["dist/jquery.loading.min.css", "dist/jquery.loading.min.js"],
+  "main": ["dist/jquery.loading.css", "dist/jquery.loading.js"],
   "dependencies": {
     "jquery": ">=1.7.0"
   }
