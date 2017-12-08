@@ -23,7 +23,8 @@
   "scripts": {
     "start": "grunt watch",
     "build": "grunt",
-    "test": "grunt test"
+    "test": "grunt test",
+    "version": "npm run build && git add dist/"
   },
   "peerDependencies": {
     "jquery": ">=1.7"
