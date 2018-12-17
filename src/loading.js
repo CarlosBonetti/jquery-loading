@@ -4,7 +4,7 @@
   if (typeof window !== 'undefined') {
     if (typeof define === 'function' && define.amd) {
       // AMD
-      define(['jquery', window], factory);
+      define(['jquery'], factory);
     } else if (typeof exports === 'object') {
       // CommonJS
       factory(require('jquery'), window);
