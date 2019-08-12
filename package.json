@@ -26,7 +26,7 @@
     "start": "webpack --watch",
     "build": "webpack && cross-env NODE_ENV=production webpack -p",
     "test": "jest",
-    "version": "npm run build && git add dist/"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "jquery": ">=1.7"
