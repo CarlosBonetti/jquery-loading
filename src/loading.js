@@ -1,26 +1,25 @@
 (function(factory) {
-  'use strict';
-  
-  if (typeof window !== 'undefined') {
-    if (typeof define === 'function' && define.amd) {
+  "use strict";
+
+  if (typeof window !== "undefined") {
+    if (typeof define === "function" && define.amd) {
       // AMD
-      define(['jquery'], factory);
-    } else if (typeof exports === 'object') {
+      define(["jquery"], factory);
+    } else if (typeof exports === "object") {
       // CommonJS
-      factory(require('jquery'), window);
+      factory(require("jquery"), window);
     } else {
       // Browser globals
       factory(jQuery, window);
     }
   } else {
-    throw new Error('Could not find DOM window object.');
+    throw new Error("Could not find DOM window object.");
   }
 })(function($, window, undefined) {
-
   var Loading = function(element, options) {
     this.element = element;
     this.settings = $.extend({}, Loading.defaults, options);
-    this.settings.fullPage = this.element.is('body');
+    this.settings.fullPage = this.element.is("body");
 
     this.init();
 
@@ -30,7 +29,6 @@
   };
 
   Loading.defaults = {
-
     /**
      * jQuery element to be used as overlay
      * If not defined, a default overlay will be created
@@ -49,7 +47,7 @@
      * Message to be rendered on the overlay content
      * Has no effect if a custom overlay is defined
      */
-    message: 'Loading...',
+    message: "Loading...",
 
     /**
      * Theme to be applied on the loading element
@@ -61,17 +59,17 @@
      *
      * Has no effect if a custom overlay is defined
      */
-    theme: 'light',
+    theme: "light",
 
     /**
      * Class(es) to be applied to the overlay element when the loading state is started
      */
-    shownClass: 'loading-shown',
+    shownClass: "loading-shown",
 
     /**
      * Class(es) to be applied to the overlay element when the loading state is stopped
      */
-    hiddenClass: 'loading-hidden',
+    hiddenClass: "loading-hidden",
 
     /**
      * Set to true to stop the loading state if the overlay is clicked
@@ -124,7 +122,6 @@
   };
 
   $.extend(Loading.prototype, {
-
     /**
      * Initializes the overlay and attach handlers to the appropriate events
      */
@@ -142,14 +139,20 @@
      * @return {jQuery} A new overlay already appended to the page's body
      */
     createOverlay: function() {
-      var overlay = $('<div class="loading-overlay loading-theme-' + this.settings.theme + '"><div class="loading-overlay-content">' + this.settings.message + '</div></div>')
+      var overlay = $(
+        '<div class="loading-overlay loading-theme-' +
+          this.settings.theme +
+          '"><div class="loading-overlay-content">' +
+          this.settings.message +
+          "</div></div>"
+      )
         .addClass(this.settings.hiddenClass)
         .hide()
-        .appendTo('body');
+        .appendTo("body");
 
-      var elementID = this.element.attr('id');
+      var elementID = this.element.attr("id");
       if (elementID) {
-        overlay.attr('id', elementID + '_loading-overlay');
+        overlay.attr("id", elementID + "_loading-overlay");
       }
 
       return overlay;
@@ -164,7 +167,7 @@
 
       // Add `shownClass` and remove `hiddenClass` from overlay when loading state
       // is activated
-      self.element.on('loading.start', function() {
+      self.element.on("loading.start", function() {
         self.overlay
           .removeClass(self.settings.hiddenClass)
           .addClass(self.settings.shownClass);
@@ -172,7 +175,7 @@
 
       // Add `hiddenClass` and remove `shownClass` from overlay when loading state
       // is stopped
-      self.element.on('loading.stop', function() {
+      self.element.on("loading.stop", function() {
         self.overlay
           .removeClass(self.settings.shownClass)
           .addClass(self.settings.hiddenClass);
@@ -180,18 +183,18 @@
 
       // Attach the 'stop loading on click' behaviour if the `stoppable` option is set
       if (self.settings.stoppable) {
-        self.overlay.on('click', function() {
+        self.overlay.on("click", function() {
           self.stop();
         });
       }
 
       // Trigger the `loading.click` event if the overlay is clicked
-      self.overlay.on('click', function() {
-        self.element.trigger('loading.click', self);
+      self.overlay.on("click", function() {
+        self.element.trigger("loading.click", self);
       });
 
       // Bind the `resize` method to `window.resize`
-      $(window).on('resize', function() {
+      $(window).on("resize", function() {
         self.resize();
       });
 
@@ -208,15 +211,15 @@
     attachOptionsHandlers: function() {
       var self = this;
 
-      self.element.on('loading.start', function(event, loading) {
+      self.element.on("loading.start", function(event, loading) {
         self.settings.onStart(loading);
       });
 
-      self.element.on('loading.stop', function(event, loading) {
+      self.element.on("loading.stop", function(event, loading) {
         self.settings.onStop(loading);
       });
 
-      self.element.on('loading.click', function(event, loading) {
+      self.element.on("loading.click", function(event, loading) {
         self.settings.onClick(loading);
       });
     },
@@ -230,7 +233,11 @@
       if (this.settings.zIndex !== undefined) {
         return this.settings.zIndex;
       } else {
-        return (parseInt(this.element.css('z-index')) || 0) + 1 + this.settings.fullPage;
+        return (
+          (parseInt(this.element.css("z-index")) || 0) +
+          1 +
+          this.settings.fullPage
+        );
       }
     },
 
@@ -243,16 +250,16 @@
       var self = this;
 
       var element = self.element,
-          totalWidth = element.outerWidth(),
-          totalHeight = element.outerHeight();
+        totalWidth = element.outerWidth(),
+        totalHeight = element.outerHeight();
 
       if (this.settings.fullPage) {
-        totalHeight = '100%';
-        totalWidth = '100%';
+        totalHeight = "100%";
+        totalWidth = "100%";
       }
 
       this.overlay.css({
-        position: self.settings.fullPage ? 'fixed' : 'absolute',
+        position: self.settings.fullPage ? "fixed" : "absolute",
         zIndex: self.calcZIndex(),
         top: element.offset().top,
         left: element.offset().left,
@@ -267,7 +274,7 @@
     start: function() {
       this.isActive = true;
       this.resize();
-      this.element.trigger('loading.start', this);
+      this.element.trigger("loading.start", this);
     },
 
     /**
@@ -275,7 +282,7 @@
      */
     stop: function() {
       this.isActive = false;
-      this.element.trigger('loading.stop', this);
+      this.element.trigger("loading.stop", this);
     },
 
     /**
@@ -302,15 +309,14 @@
      * Destroy plugin instance.
      */
     destroy: function() {
-    	this.overlay.remove();
+      this.overlay.remove();
     }
-
   });
 
   /**
    * Name of the data attribute where the plugin object will be stored
    */
-  var dataAttr = 'jquery-loading';
+  var dataAttr = "jquery-loading";
 
   /**
    * Initializes the plugin and return a chainable jQuery object
@@ -318,15 +324,19 @@
    * @param {Object} [options] Initialization options. Extends `Loading.defaults`
    * @return {jQuery}
    */
-  $.fn.loading = function (options) {
+  $.fn.loading = function(options) {
     return this.each(function() {
       // (Try to) retrieve an existing plugin object associated with element
       var loading = $.data(this, dataAttr);
 
       if (!loading) {
         // First call. Initialize and save plugin object
-        if (options === undefined || typeof options === 'object' ||
-            options === 'start' || options === 'toggle') {
+        if (
+          options === undefined ||
+          typeof options === "object" ||
+          options === "start" ||
+          options === "toggle"
+        ) {
           // Initialize it just if argument is undefined, a config object
           // or a direct call to 'start' or 'toggle' methods
           $.data(this, dataAttr, new Loading($(this), options));
@@ -336,7 +346,7 @@
         if (options === undefined) {
           // $(...).loading() call. Call the 'start' by default
           loading.start();
-        } else if (typeof options === 'string') {
+        } else if (typeof options === "string") {
           // $(...).loading('method') call. Execute 'method'
           loading[options].apply(loading);
         } else {
@@ -382,7 +392,7 @@
    *  `$(':loading')` to get all the elements with the loading state active
    *  `$('#my-element').is(':loading')` to check if the element is loading
    */
-  $.expr[':'].loading = function(element) {
+  $.expr[":"].loading = function(element) {
     var loadingObj = $.data(element, dataAttr);
 
     if (!loadingObj) {
@@ -393,5 +403,4 @@
   };
 
   $.Loading = Loading;
-
 });
