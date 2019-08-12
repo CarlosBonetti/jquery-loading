@@ -19,9 +19,6 @@ Include it:
 ```html
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="jquery.loading.js"></script>
-
-<!-- Include the CSS file to use the plugin default themes and loaders -->
-<link href="jquery.loading.css" rel="stylesheet" />
 ```
 
 Use it:
@@ -31,3 +28,23 @@ $("#some-element").loading();
 ```
 
 Visit [the website](http://carlosbonetti.github.io/jquery-loading/) for full list of options, methods and customization.
+
+## Contributing to this project
+
+Install dependencies once:
+
+```
+$ yarn install
+```
+
+Then build the project (generates `dist/` files):
+
+```
+$ yarn build
+```
+
+Run all tests with:
+
+```
+$ yarn test
+```
