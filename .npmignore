@@ -5,6 +5,5 @@ src
 .editorconfig
 .jshintrc
 .travis.yml
-bower.json
 Gruntfile.js
 .gitignore
