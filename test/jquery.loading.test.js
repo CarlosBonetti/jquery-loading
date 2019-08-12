@@ -1,40 +1,51 @@
-/* jshint undef:false */
+const $ = require("jquery");
+require("../dist/jquery.loading");
 
-(function($, undefined) {
+// Translate assert functions to jest assertions
+// Remove this after migrate to jest assertions
+const assert = {
+  ok: function(expr, msg) {
+    expect(expr).toBeTruthy();
+  },
+  equal: function(obj1, obj2, msg) {
+    expect(obj1).toEqual(obj2);
+  },
+  notEqual: function(obj1, obj2, msg) {
+    expect(obj1).not.toEqual(obj2);
+  }
+};
+
+describe("jquery-loading", function() {
   var div, div2;
 
-  QUnit.module("All tests", {
-    beforeEach: function() {
-      div = $('<div id="test-div">Test div</div>');
-      div2 = $('<div style="z-index: 100">Test div #2</div>');
-    },
-    afterEach: function() {
-      div.loading("destroy");
-      div2.loading("destroy");
-    }
+  beforeEach(function() {
+    div = $('<div id="test-div">Test div</div>');
+    div2 = $('<div style="z-index: 100">Test div #2</div>');
   });
 
-  QUnit.test("if loading jquery function is chainable", function(assert) {
+  afterEach(function() {
+    div.loading("destroy");
+    div2.loading("destroy");
+  });
+
+  test("if loading jquery function is chainable", function() {
     assert.ok(div.loading() instanceof $, "loading is chainable");
   });
 
-  QUnit.test(
-    "if loading object is accessible by Loading jquery method",
-    function(assert) {
-      div.loading();
-      assert.ok(
-        div.Loading() instanceof $.Loading,
-        "Started elements have a valid Loading object"
-      );
-      assert.equal(
-        div.Loading().element.attr("id"),
-        "test-div",
-        "Loading object has reference to the right element"
-      );
-    }
-  );
+  test("if loading object is accessible by Loading jquery method", function() {
+    div.loading();
+    assert.ok(
+      div.Loading() instanceof $.Loading,
+      "Started elements have a valid Loading object"
+    );
+    assert.equal(
+      div.Loading().element.attr("id"),
+      "test-div",
+      "Loading object has reference to the right element"
+    );
+  });
 
-  QUnit.test("Loading jquery method as plugin initializer", function(assert) {
+  test("Loading jquery method as plugin initializer", function() {
     var obj = div.Loading();
     assert.ok(
       obj instanceof $.Loading,
@@ -55,50 +66,44 @@
     );
   });
 
-  QUnit.test(
-    "if subsequent calls of Loading with new config options reinitialize the plugin object",
-    function(assert) {
-      // Using $.fn.Loading
-      var obj1 = div.Loading({
-        message: "First call"
-      });
+  test("if subsequent calls of Loading with new config options reinitialize the plugin object", function() {
+    // Using $.fn.Loading
+    var obj1 = div.Loading({
+      message: "First call"
+    });
 
-      var obj2 = div.Loading({
-        message: "Second call"
-      });
-      assert.notEqual(obj1, obj2, "Underlying plugin object should change");
-      assert.equal(
-        obj2.settings.message,
-        "Second call",
-        "New config options should be considered"
-      );
-    }
-  );
+    var obj2 = div.Loading({
+      message: "Second call"
+    });
+    assert.notEqual(obj1, obj2, "Underlying plugin object should change");
+    assert.equal(
+      obj2.settings.message,
+      "Second call",
+      "New config options should be considered"
+    );
+  });
 
-  QUnit.test(
-    "if subsequent calls of loading with new config options reinitialize the plugin object",
-    function(assert) {
-      // Using $.fn.loading
-      div.loading({
-        message: "First call"
-      });
-      var obj1 = div.data("jquery-loading");
+  test("if subsequent calls of loading with new config options reinitialize the plugin object", function() {
+    // Using $.fn.loading
+    div.loading({
+      message: "First call"
+    });
+    var obj1 = div.data("jquery-loading");
 
-      div.loading({
-        message: "Second call"
-      });
-      var obj2 = div.data("jquery-loading");
+    div.loading({
+      message: "Second call"
+    });
+    var obj2 = div.data("jquery-loading");
 
-      assert.notEqual(obj1, obj2, "Underlying plugin object should change");
-      assert.equal(
-        obj2.settings.message,
-        "Second call",
-        "New config options should be considered"
-      );
-    }
-  );
+    assert.notEqual(obj1, obj2, "Underlying plugin object should change");
+    assert.equal(
+      obj2.settings.message,
+      "Second call",
+      "New config options should be considered"
+    );
+  });
 
-  QUnit.test("events and triggers", function(assert) {
+  test("events and triggers", function() {
     var mustBeTrueStart = false;
     div.on("loading.start", function(event, loading) {
       mustBeTrueStart = true;
@@ -139,7 +144,7 @@
     );
   });
 
-  QUnit.test("active flag", function(assert) {
+  test("active flag", function() {
     div.loading();
     div.off("loading.start").off("loading.stop");
 
@@ -164,7 +169,7 @@
     );
   });
 
-  QUnit.test(":loading selector", function(assert) {
+  test(":loading selector", function() {
     assert.equal(
       div.is(":loading"),
       false,
@@ -186,7 +191,7 @@
     );
   });
 
-  QUnit.test("start option", function(assert) {
+  test("start option", function() {
     div.loading({
       start: false
     });
@@ -198,7 +203,7 @@
     );
   });
 
-  QUnit.test("if shownClass is applied to overlay elements", function(assert) {
+  test("if shownClass is applied to overlay elements", function() {
     var shownClass = $.Loading.defaults.shownClass;
     var obj = div.Loading();
 
@@ -225,7 +230,7 @@
     );
   });
 
-  QUnit.test("if hiddenClass is applied to overlay elements", function(assert) {
+  test("if hiddenClass is applied to overlay elements", function() {
     var hiddenClass = $.Loading.defaults.hiddenClass;
     var obj = div.Loading();
 
@@ -252,27 +257,25 @@
     );
   });
 
-  QUnit.test("if overlay detects z-index of the target element", function(
-    assert
-  ) {
+  test("if overlay detects z-index of the target element", function() {
     var load = div.Loading();
     assert.equal(
       load.overlay.css("z-index"),
-      1,
+      "1",
       "Overlay z-index set to 1 if target has no index defined"
     );
 
     var bodyLoad = $("body").Loading();
     assert.equal(
       bodyLoad.overlay.css("z-index"),
-      2,
+      "2",
       "Body overlay z-index set to 2 if body has no index defined"
     );
 
     var load2 = div2.Loading();
     assert.equal(
       load2.overlay.css("z-index"),
-      101,
+      "101",
       "Overlay z-index set to target z-index + 1"
     );
 
@@ -280,37 +283,32 @@
     load2.resize();
     assert.equal(
       load2.overlay.css("z-index"),
-      51,
+      "51",
       "Overlay z-index changed if target element changed"
     );
   });
 
-  QUnit.test(
-    "if zIndex option is used by the default plugin's overlay",
-    function(assert) {
-      var obj = div.Loading({
-        zIndex: 42
-      });
-      assert.equal(
-        obj.overlay.css("z-index"),
-        42,
-        "Overlay z-index should be the one passed as plugin setting"
-      );
+  test("if zIndex option is used by the default plugin's overlay", function() {
+    var obj = div.Loading({
+      zIndex: 42
+    });
+    assert.equal(
+      obj.overlay.css("z-index"),
+      "42",
+      "Overlay z-index should be the one passed as plugin setting"
+    );
 
-      obj = div2.Loading({
-        zIndex: 1e5
-      });
-      assert.equal(
-        obj.overlay.css("z-index"),
-        1e5,
-        "Overlay z-index should be the one passed as plugin setting"
-      );
-    }
-  );
+    obj = div2.Loading({
+      zIndex: 1e5
+    });
+    assert.equal(
+      obj.overlay.css("z-index"),
+      "100000",
+      "Overlay z-index should be the one passed as plugin setting"
+    );
+  });
 
-  QUnit.test("first call with different argument types and values", function(
-    assert
-  ) {
+  test("first call with different argument types and values", function() {
     var div3 = $("<span></span>");
     var div4 = $("<div></div>");
     var div5 = $("<p></p>");
@@ -325,7 +323,7 @@
     assert.ok(!div6.loading("test").data("jquery-loading"));
   });
 
-  QUnit.test("destroy method should remove overlay from DOM", function(assert) {
+  test("destroy method should remove overlay from DOM", function() {
     div.loading();
     div.loading("stop");
     assert.equal(
@@ -342,23 +340,20 @@
     );
   });
 
-  QUnit.test(
-    "when new settings are passed to element already initialized",
-    function(assert) {
-      div.loading();
-      var overlay1 = div.Loading().overlay;
+  test("when new settings are passed to element already initialized", function() {
+    div.loading();
+    var overlay1 = div.Loading().overlay;
 
-      div.loading({ message: "Second message" });
-      assert.equal(
-        overlay1.parents("body").length,
-        0,
-        "Old overlay should be destroyed"
-      );
-      assert.equal(
-        div.Loading().overlay.text(),
-        "Second message",
-        "New config should be used"
-      );
-    }
-  );
-})(jQuery);
+    div.loading({ message: "Second message" });
+    assert.equal(
+      overlay1.parents("body").length,
+      0,
+      "Old overlay should be destroyed"
+    );
+    assert.equal(
+      div.Loading().overlay.text(),
+      "Second message",
+      "New config should be used"
+    );
+  });
+});

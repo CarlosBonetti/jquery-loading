@@ -1,9 +1,0 @@
-node_modules
-demo
-tests
-src
-.editorconfig
-.jshintrc
-.travis.yml
-Gruntfile.js
-.gitignore

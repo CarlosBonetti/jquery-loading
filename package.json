@@ -17,37 +17,30 @@
   "repository": "http://github.com/CarlosBonetti/jquery-loading",
   "homepage": "http://carlosbonetti.github.io/jquery-loading/",
   "main": "./dist/jquery.loading.js",
-  "style": [
-    "./dist/jquery.loading.css"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
   },
   "scripts": {
-    "start": "grunt watch",
-    "build": "grunt",
-    "test": "grunt test",
+    "start": "webpack --watch",
+    "build": "webpack && cross-env NODE_ENV=production webpack -p",
+    "test": "jest",
     "version": "npm run build && git add dist/"
   },
   "peerDependencies": {
     "jquery": ">=1.7"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-cssmin": "^1.0.2",
-    "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-qunit": "^1.2.0",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
+    "cross-env": "5.2.0",
+    "css-loader": "3.2.0",
     "husky": "3.0.3",
-    "jquery": "^1.11.1",
-    "jshint": "^2.9.4",
+    "jest": "24.8.0",
+    "jquery": "1.11.1",
     "prettier": "1.18.2",
     "pretty-quick": "1.11.1",
-    "qunitjs": "^2.0.1"
+    "style-loader": "1.0.0",
+    "webpack": "4.39.1",
+    "webpack-cli": "3.3.6"
   }
 }
