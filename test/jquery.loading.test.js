@@ -4,13 +4,13 @@ require("../dist/jquery.loading");
 // Translate assert functions to jest assertions
 // Remove this after migrate to jest assertions
 const assert = {
-  ok: function(expr, msg) {
+  ok: function(expr) {
     expect(expr).toBeTruthy();
   },
-  equal: function(obj1, obj2, msg) {
+  equal: function(obj1, obj2) {
     expect(obj1).toEqual(obj2);
   },
-  notEqual: function(obj1, obj2, msg) {
+  notEqual: function(obj1, obj2) {
     expect(obj1).not.toEqual(obj2);
   }
 };

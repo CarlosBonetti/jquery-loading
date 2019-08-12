@@ -26,7 +26,8 @@
     "start": "webpack --watch",
     "build": "webpack && cross-env NODE_ENV=production webpack -p",
     "test": "jest",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "eslint": "eslint src/**/*.js test/**/*.js"
   },
   "peerDependencies": {
     "jquery": ">=1.7"
@@ -34,6 +35,7 @@
   "devDependencies": {
     "cross-env": "5.2.0",
     "css-loader": "3.2.0",
+    "eslint": "6.1.0",
     "husky": "3.0.3",
     "jest": "24.8.0",
     "jquery": "1.11.1",
