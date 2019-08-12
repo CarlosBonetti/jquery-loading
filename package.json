@@ -1,6 +1,6 @@
 {
   "name": "jquery-easy-loading",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0-rc.2",
   "description": "Easily add and manipulate loading states of any element on the page",
   "keywords": [
     "jquery",
