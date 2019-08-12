@@ -1,249 +1,270 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jquery-loading Demo</title>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>jquery-loading Demo</title>
 
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://yandex.st/highlightjs/8.0/styles/default.min.css" rel="stylesheet">
-  <link href="../src/loading.css" rel="stylesheet">
-  <link href="demo.css" rel="stylesheet">
+    <link
+      href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="http://yandex.st/highlightjs/8.0/styles/default.min.css"
+      rel="stylesheet"
+    />
+    <!-- <link href="../src/loading.css" rel="stylesheet" /> -->
+    <link href="demo.css" rel="stylesheet" />
 
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.2/randomColor.min.js"></script>
-  <script src="../src/loading.js"></script>
-</head>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.2/randomColor.min.js"></script>
+    <script src="../dist/jquery.loading.js"></script>
+  </head>
 
-<body>
-  <div class="container">
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Basic usage</h3>
+  <body>
+    <div class="container">
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Basic usage</h3>
 
-      <div id="loading-always" class="loading-div">
-        This div is always loading
-      </div>
+        <div id="loading-always" class="loading-div">
+          This div is always loading
+        </div>
 
-      <script>
-      $('#loading-always').loading();
-      </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Starting</h3>
-
-      <div id="loading-start" class="loading-div">
-        This div will start loading if you click it
-      </div>
-
-      <script>
-        $('#loading-start').click(function() {
-          $(this).loading('start');
-        });
+        <script>
+          $("#loading-always").loading();
         </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Stopping</h3>
-
-      <div id="loading-stop" class="loading-div">
-        This div will stop loading if you click it
       </div>
 
-      <script>
-        $('#loading-stop').loading({
-          stoppable: true
-        });
-      </script>
-    </div>
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Starting</h3>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Toggling</h3>
+        <div id="loading-start" class="loading-div">
+          This div will start loading if you click it
+        </div>
 
-      <div id="loading-toggle" class="loading-div">
-        This div is toggling the loading state
+        <script>
+          $("#loading-start").click(function() {
+            $(this).loading("start");
+          });
+        </script>
       </div>
 
-      <script>
-        setInterval(function() {
-          $('#loading-toggle').loading('toggle');
-        }, 2000);
-      </script>
-    </div>
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Stopping</h3>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Custom animation</h3>
+        <div id="loading-stop" class="loading-div">
+          This div will stop loading if you click it
+        </div>
 
-      <div id="loading-custom-animation" class="loading-div loading-blink">
-        This div has a custom start / stop animation
-      </div>
-
-      <script>
-        $('#loading-custom-animation').loading({
-          onStart: function(loading) {
-            loading.overlay.slideDown(400);
-          },
-          onStop: function(loading) {
-            loading.overlay.slideUp(400);
-          }
-        });
-      </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Themes</h3>
-
-      <div id="loading-dark-theme" class="loading-div">
-        This div has a different theme (dark)
-      </div>
-
-      <script>
-        $('#loading-dark-theme').loading({
-          theme: 'dark'
-        });
-      </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Custom message</h3>
-
-      <div id="loading-custom-message" class="loading-div">
-        This div has a custom loading method
-      </div>
-
-      <script>
-        $('#loading-custom-message').loading({
-          message: 'Working...'
-        });
-      </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Controls with events handling</h3>
-
-      <button id="loading-control-btn" class="btn btn-primary btn-block">Click me to start loading</button>
-
-      <div id="loading-control" class="loading-div">
-        This div is button controled, using the events `loading.start` and `loading.stop` to change the state (text) of the button
-      </div>
-
-      <script>
-        $('#loading-control-btn').click(function() {
-          $('#loading-control').loading('toggle');
-        });
-
-        $('#loading-control').on('loading.start', function() {
-          $('#loading-control-btn').html('Click me to stop loading');
-        }).on('loading.stop', function() {
-          $('#loading-control-btn').html('Click me to start loading');
-        });
-      </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Body loading</h3>
-
-      <div>
-        <button id="loading-body-btn" class="btn btn-primary btn-block">Click me to add a loading state to the page's body</button>
-
-        <button id="loading-body2-btn" class="btn btn-primary btn-block">Second body loading, different configs</button>
-      </div>
-
-      <script>
-        $('#loading-body-btn').click(function() {
-          $('body').loading({
+        <script>
+          $("#loading-stop").loading({
             stoppable: true
           });
-        });
+        </script>
+      </div>
 
-        $('#loading-body2-btn').click(function() {
-          $('body').loading({
-            stoppable: true,
-            message: 'Body loading, another message...',
-            theme: 'dark'
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Toggling</h3>
+
+        <div id="loading-toggle" class="loading-div">
+          This div is toggling the loading state
+        </div>
+
+        <script>
+          setInterval(function() {
+            $("#loading-toggle").loading("toggle");
+          }, 2000);
+        </script>
+      </div>
+
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Custom animation</h3>
+
+        <div id="loading-custom-animation" class="loading-div loading-blink">
+          This div has a custom start / stop animation
+        </div>
+
+        <script>
+          $("#loading-custom-animation").loading({
+            onStart: function(loading) {
+              loading.overlay.slideDown(400);
+            },
+            onStop: function(loading) {
+              loading.overlay.slideUp(400);
+            }
           });
-        });
-      </script>
-    </div>
-
-    <div class="example col-lg-4 col-sm-6">
-      <h3>:loading selector</h3>
-
-      <div>
-        <button id="stop-all" class="btn btn-primary btn-block">Stop all currently open</button>
+        </script>
       </div>
 
-      <script>
-        $('#stop-all').click(function() {
-          $(':loading').loading('stop');
-        });
-      </script>
-    </div>
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Themes</h3>
 
+        <div id="loading-dark-theme" class="loading-div">
+          This div has a different theme (dark)
+        </div>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3><code>start</code> option</h3>
-
-      <div id="loading-lazy-start" class="loading-div">
-        This div is not started on initialization
+        <script>
+          $("#loading-dark-theme").loading({
+            theme: "dark"
+          });
+        </script>
       </div>
 
-      <button id="loading-lazy-start-btn" class="btn btn-primary btn-block">But it will if you click here</button>
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Custom message</h3>
 
-      <script>
-        $('#loading-lazy-start').loading({
-          theme: 'dark',
-          message: 'Lazy start',
-          start: false
-        });
+        <div id="loading-custom-message" class="loading-div">
+          This div has a custom loading method
+        </div>
 
-        $('#loading-lazy-start-btn').click(function() {
-          $('#loading-lazy-start').loading('start');
-        });
-      </script>
-    </div>
+        <script>
+          $("#loading-custom-message").loading({
+            message: "Working..."
+          });
+        </script>
+      </div>
 
-    <div id="custom-overlay">
-      <div class="loading-spinner">
-        Loading (custom)...
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Controls with events handling</h3>
+
+        <button id="loading-control-btn" class="btn btn-primary btn-block">
+          Click me to start loading
+        </button>
+
+        <div id="loading-control" class="loading-div">
+          This div is button controled, using the events `loading.start` and
+          `loading.stop` to change the state (text) of the button
+        </div>
+
+        <script>
+          $("#loading-control-btn").click(function() {
+            $("#loading-control").loading("toggle");
+          });
+
+          $("#loading-control")
+            .on("loading.start", function() {
+              $("#loading-control-btn").html("Click me to stop loading");
+            })
+            .on("loading.stop", function() {
+              $("#loading-control-btn").html("Click me to start loading");
+            });
+        </script>
+      </div>
+
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Body loading</h3>
+
+        <div>
+          <button id="loading-body-btn" class="btn btn-primary btn-block">
+            Click me to add a loading state to the page's body
+          </button>
+
+          <button id="loading-body2-btn" class="btn btn-primary btn-block">
+            Second body loading, different configs
+          </button>
+        </div>
+
+        <script>
+          $("#loading-body-btn").click(function() {
+            $("body").loading({
+              stoppable: true
+            });
+          });
+
+          $("#loading-body2-btn").click(function() {
+            $("body").loading({
+              stoppable: true,
+              message: "Body loading, another message...",
+              theme: "dark"
+            });
+          });
+        </script>
+      </div>
+
+      <div class="example col-lg-4 col-sm-6">
+        <h3>:loading selector</h3>
+
+        <div>
+          <button id="stop-all" class="btn btn-primary btn-block">
+            Stop all currently open
+          </button>
+        </div>
+
+        <script>
+          $("#stop-all").click(function() {
+            $(":loading").loading("stop");
+          });
+        </script>
+      </div>
+
+      <div class="example col-lg-4 col-sm-6">
+        <h3><code>start</code> option</h3>
+
+        <div id="loading-lazy-start" class="loading-div">
+          This div is not started on initialization
+        </div>
+
+        <button id="loading-lazy-start-btn" class="btn btn-primary btn-block">
+          But it will if you click here
+        </button>
+
+        <script>
+          $("#loading-lazy-start").loading({
+            theme: "dark",
+            message: "Lazy start",
+            start: false
+          });
+
+          $("#loading-lazy-start-btn").click(function() {
+            $("#loading-lazy-start").loading("start");
+          });
+        </script>
+      </div>
+
+      <div id="custom-overlay">
+        <div class="loading-spinner">
+          Loading (custom)...
+        </div>
+      </div>
+
+      <div class="example col-lg-4 col-sm-6">
+        <h3>Custom overlay</h3>
+
+        <div id="loading-custom-overlay" class="loading-div loading-blink">
+          This div has a custom overlay element
+        </div>
+
+        <script>
+          $("#loading-custom-overlay").loading({
+            overlay: $("#custom-overlay")
+          });
+        </script>
       </div>
     </div>
 
-    <div class="example col-lg-4 col-sm-6">
-      <h3>Custom overlay</h3>
+    <footer class="container text-right">
+      <a href="#">Top &uarr;</a>
+    </footer>
 
-      <div id="loading-custom-overlay" class="loading-div loading-blink">
-        This div has a custom overlay element
-      </div>
+    <script>
+      $(".loading-div").each(function() {
+        $(this).css(
+          "background-color",
+          randomColor({
+            luminosity: "dark"
+          })
+        );
+      });
 
-      <script>
-        $('#loading-custom-overlay').loading({
-          overlay: $('#custom-overlay')
-        });
-      </script>
-    </div>
-  </div>
-
-  <footer class="container text-right">
-    <a href="#">Top &uarr;</a>
-  </footer>
-
-  <script>
-    $('.loading-div').each(function() {
-      $(this).css('background-color', randomColor({
-        luminosity: 'dark'
-      }));
-    });
-
-    setInterval(function() {
-      $('.loading-blink').loading('toggle');
-    }, 2000);
-  </script>
-</body>
+      setInterval(function() {
+        $(".loading-blink").loading("toggle");
+      }, 2000);
+    </script>
+  </body>
 </html>

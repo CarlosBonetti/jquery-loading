@@ -1,5 +1,4 @@
-/* This CSS file just define some default styles and loaders */
-/* You don't need to include it if you're working with your custom overlay loader element */
+/* Default jquery-loading styles */
 
 .loading-overlay {
   display: table;
