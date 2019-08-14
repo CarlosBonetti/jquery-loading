@@ -1,6 +1,7 @@
 # jquery-loading
 
 [![Build Status](https://travis-ci.org/CarlosBonetti/jquery-loading.svg)](https://travis-ci.org/CarlosBonetti/jquery-loading)
+![NPM downloads per month](https://img.shields.io/npm/dm/jquery-easy-loading.svg)
 
 Add and manipulate loading states of any element on the page.
 
